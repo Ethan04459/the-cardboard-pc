@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardboard PC</title>
+<title>Cardboard PC – Components of a Computer</title>
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
@@ -546,6 +546,108 @@
     font-size: 0.9rem;
   }
 
+  /* REAL WORLD APPS */
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  .app-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .app-card:hover {
+    border-color: rgba(79,195,247,0.4);
+    transform: translateY(-3px);
+  }
+  .app-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .app-card:hover::before { opacity: 1; }
+
+  .app-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .app-emoji {
+    font-size: 2rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .app-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.25rem;
+  }
+
+  .app-sub {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+  }
+
+  .app-desc {
+    font-size: 0.85rem;
+    color: #9aa3b8;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+
+  .app-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .app-list li {
+    font-size: 0.82rem;
+    color: #b0b8cc;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    line-height: 1.5;
+  }
+
+  .chip {
+    display: inline-block;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 99px;
+    flex-shrink: 0;
+    border: 1px solid;
+  }
+  .chip.cpu  { color: #f5a623; border-color: rgba(245,166,35,0.4);  background: rgba(245,166,35,0.08); }
+  .chip.gpu  { color: #4fc3f7; border-color: rgba(79,195,247,0.4);  background: rgba(79,195,247,0.08); }
+  .chip.ram  { color: #a78bfa; border-color: rgba(167,139,250,0.4); background: rgba(167,139,250,0.08); }
+  .chip.ssd  { color: #48c78e; border-color: rgba(72,199,142,0.4);  background: rgba(72,199,142,0.08); }
+
   /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
@@ -589,6 +691,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#components">Components</a></li>
+    <li><a href="#applications">Applications</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#team">Team</a></li>
   </ul>
@@ -638,6 +741,118 @@
   </div>
 
   <div class="comp-grid" id="comp-grid"></div>
+</div>
+
+<!-- REAL WORLD APPLICATIONS -->
+<div id="applications">
+  <div class="components-header reveal">
+    <div class="section-label">Why it matters</div>
+    <h2 class="section-title">Real&#8209;World <span class="hl">Applications</span></h2>
+    <div class="sep"></div>
+    <p class="section-desc">The same components in your cardboard model power everything from games to AI to careers.</p>
+  </div>
+
+  <div class="apps-grid" id="apps-grid">
+
+    <div class="app-card reveal">
+      <div class="app-header">
+        <span class="app-emoji">🕹️</span>
+        <div>
+          <div class="app-title">Gaming Performance</div>
+          <div class="app-sub">High FPS · Better visuals · Smooth gameplay</div>
+        </div>
+      </div>
+      <p class="app-desc">Modern games rely heavily on the GPU for rendering graphics, lighting, shadows, and physics.</p>
+      <ul class="app-list">
+        <li><span class="chip gpu">GPU</span> Higher FPS, smoother gameplay, and better visual quality</li>
+        <li><span class="chip cpu">CPU</span> Handles game logic, AI, and physics calculations</li>
+        <li><span class="chip ram">RAM</span> Reduces stuttering and improves loading times</li>
+      </ul>
+    </div>
+
+    <div class="app-card reveal">
+      <div class="app-header">
+        <span class="app-emoji">🎬</span>
+        <div>
+          <div class="app-title">Video Editing &amp; Content Creation</div>
+          <div class="app-sub">Premiere Pro · DaVinci Resolve · After Effects</div>
+        </div>
+      </div>
+      <p class="app-desc">Editing software demands serious hardware to render, export, and play back large video files.</p>
+      <ul class="app-list">
+        <li><span class="chip cpu">CPU</span> Rendering, exporting, and timeline performance</li>
+        <li><span class="chip gpu">GPU</span> Effects, colour grading, and real-time playback</li>
+        <li><span class="chip ssd">SSD</span> Fast loading of large video files</li>
+      </ul>
+    </div>
+
+    <div class="app-card reveal">
+      <div class="app-header">
+        <span class="app-emoji">🤖</span>
+        <div>
+          <div class="app-title">AI, Machine Learning &amp; Data</div>
+          <div class="app-sub">Neural networks · Image recognition · Simulations</div>
+        </div>
+      </div>
+      <p class="app-desc">AI workloads use GPUs because they can process thousands of operations in parallel.</p>
+      <ul class="app-list">
+        <li><span class="chip gpu">GPU</span> Accelerates neural networks and simulations</li>
+        <li><span class="chip cpu">CPU</span> Handles control logic and data organisation</li>
+        <li><span class="chip ssd">SSD</span> Reduces dataset loading times</li>
+      </ul>
+    </div>
+
+    <div class="app-card reveal">
+      <div class="app-header">
+        <span class="app-emoji">🧠</span>
+        <div>
+          <div class="app-title">Everyday Computing</div>
+          <div class="app-sub">Browsing · Multitasking · Daily productivity</div>
+        </div>
+      </div>
+      <p class="app-desc">Even normal tasks depend on good hardware working together behind the scenes.</p>
+      <ul class="app-list">
+        <li><span class="chip cpu">CPU</span> Smooth multitasking across apps</li>
+        <li><span class="chip ram">RAM</span> Keeps apps open without lag</li>
+        <li><span class="chip ssd">SSD</span> Instant boot times and fast app launches</li>
+        <li><span class="chip gpu">GPU</span> Smooth video playback and UI animations</li>
+      </ul>
+    </div>
+
+    <div class="app-card reveal">
+      <div class="app-header">
+        <span class="app-emoji">🎮</span>
+        <div>
+          <div class="app-title">Esports &amp; Competitive Play</div>
+          <div class="app-sub">200–300 FPS · Low latency · No bottlenecks</div>
+        </div>
+      </div>
+      <p class="app-desc">Competitive players push hardware to the limit — every millisecond counts.</p>
+      <ul class="app-list">
+        <li><span class="chip gpu">GPU</span> Pushes 200–300 FPS for high-refresh monitors</li>
+        <li><span class="chip cpu">CPU</span> Avoids bottlenecks that cap frame rates</li>
+        <li><span class="chip ram">RAM</span> Low latency for responsive input</li>
+      </ul>
+    </div>
+
+    <div class="app-card reveal">
+      <div class="app-header">
+        <span class="app-emoji">🏢</span>
+        <div>
+          <div class="app-title">Professional Workstations</div>
+          <div class="app-sub">Engineering · Architecture · Science</div>
+        </div>
+      </div>
+      <p class="app-desc">Industries depend on powerful hardware to model, simulate, and calculate at scale.</p>
+      <ul class="app-list">
+        <li><span class="chip gpu">GPU</span> 3D modelling and complex simulations</li>
+        <li><span class="chip cpu">CPU</span> Calculations and compiling code</li>
+        <li><span class="chip ram">RAM</span> Handles huge datasets in memory</li>
+        <li><span class="chip ssd">SSD</span> Rapid project loading with NVMe speeds</li>
+      </ul>
+    </div>
+
+  </div>
 </div>
 
 <!-- ABOUT -->
