@@ -935,3 +935,280 @@ footer .footer-logo span {
   .boot-arrow { margin-left: 1rem; }
   .flow-grid  { grid-template-columns: 1fr; padding: 0 1rem 3rem; }
 }
+
+/* ── BUILD PROCESS ── */
+#build { padding-top: 0; }
+
+.build-wrap {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+  align-items: start;
+}
+
+/* numbered steps */
+.build-steps { display: flex; flex-direction: column; gap: 0; }
+
+.build-step {
+  display: flex;
+  gap: 1.4rem;
+  position: relative;
+}
+
+.build-step-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.build-step-num {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(245,166,35,0.15), rgba(245,166,35,0.05));
+  border: 1.5px solid rgba(245,166,35,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.build-step-line {
+  width: 2px;
+  flex: 1;
+  min-height: 30px;
+  background: linear-gradient(to bottom, rgba(245,166,35,0.3), rgba(245,166,35,0.05));
+  margin: 4px 0;
+}
+
+.build-step-right {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 1rem;
+  flex: 1;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.build-step:hover .build-step-right {
+  border-color: rgba(245,166,35,0.35);
+  transform: translateX(4px);
+}
+
+.build-step-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.55rem;
+}
+
+.build-step-right p {
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: #b0b8cc;
+  font-weight: 300;
+}
+
+/* ── PROGRESS CARD ── */
+.build-sidebar { position: sticky; top: 5rem; }
+
+.progress-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.progress-card-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-align: center;
+}
+
+/* ring */
+.progress-ring-wrap {
+  position: relative;
+  width: 140px; height: 140px;
+  margin: 0 auto;
+}
+
+.progress-ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+
+.ring-bg {
+  fill: none;
+  stroke: rgba(255,255,255,0.05);
+  stroke-width: 10;
+}
+
+.ring-fill {
+  fill: none;
+  stroke: url(#ringGrad);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.05s linear;
+  filter: drop-shadow(0 0 6px rgba(245,166,35,0.5));
+}
+
+/* inject gradient def inline via CSS trick */
+.progress-ring::before { content: ''; }
+
+.progress-ring-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+}
+
+.progress-pct {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(245,166,35,0.4));
+}
+.progress-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* individual progress bars */
+.progress-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pbar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.pbar-label {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.04em;
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.pbar-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.pbar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent2), var(--accent3));
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 6px rgba(79,195,247,0.3);
+}
+
+.pbar-val {
+  font-size: 0.65rem;
+  font-family: 'Orbitron', sans-serif;
+  color: var(--accent2);
+  width: 32px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* overall bar */
+.progress-overall {
+  border-top: 1px solid var(--border);
+  padding-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.progress-overall-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.progress-overall-track {
+  height: 10px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 99px;
+  overflow: hidden;
+  border: 1px solid rgba(245,166,35,0.15);
+}
+
+.progress-overall-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #f5a623, #ffe082, #f5a623);
+  background-size: 200% 100%;
+  border-radius: 99px;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: shimmer 2.5s linear infinite;
+  box-shadow: 0 0 10px rgba(245,166,35,0.4);
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.progress-overall-pct {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: right;
+  letter-spacing: 0.05em;
+}
+
+/* we need to add the SVG gradient defs — done via inline SVG in the ring */
+@media (max-width: 900px) {
+  .build-wrap {
+    grid-template-columns: 1fr;
+  }
+  .build-sidebar {
+    position: static;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .build-wrap { padding: 0 1rem 3rem; gap: 2rem; }
+}
