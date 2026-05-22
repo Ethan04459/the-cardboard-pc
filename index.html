@@ -20,6 +20,7 @@
     <li><a href="#intro">Introduction</a></li>
     <li><a href="#components">Components</a></li>
     <li><a href="#applications">Applications</a></li>
+    <li><a href="#workflow">How It Works</a></li>
     <li><a href="#conclusion">Conclusion</a></li>
     <li><a href="#team">Team</a></li>
   </ul>
@@ -213,6 +214,141 @@
         <li><span class="chip ram">RAM</span> Handles huge datasets in memory</li>
         <li><span class="chip ssd">SSD</span> Rapid project loading with NVMe speeds</li>
       </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- HOW COMPONENTS WORK TOGETHER -->
+<div id="workflow">
+  <div class="components-header reveal">
+    <div class="section-label">The bigger picture</div>
+    <h2 class="section-title">How Components <span class="hl">Work Together</span></h2>
+    <div class="sep"></div>
+    <p class="section-desc">Every component has a job — but the magic happens when they all work as one system.</p>
+  </div>
+
+  <!-- BOOT SEQUENCE -->
+  <div class="workflow-block reveal">
+    <div class="workflow-block-header">
+      <span class="workflow-emoji">⚡</span>
+      <div>
+        <div class="workflow-title">System Boot: Press Power → OS Loads</div>
+        <div class="workflow-sub">What actually happens in those first few seconds</div>
+      </div>
+    </div>
+    <div class="boot-steps">
+      <div class="boot-step">
+        <div class="boot-num">1</div>
+        <div class="boot-content">
+          <div class="boot-step-title">Power Button Pressed</div>
+          <p>You press the power button. A signal travels to the <strong>PSU</strong>, which converts mains AC electricity into the stable DC voltages the computer needs (+12V, +5V, +3.3V).</p>
+        </div>
+      </div>
+      <div class="boot-arrow">↓</div>
+      <div class="boot-step">
+        <div class="boot-num">2</div>
+        <div class="boot-content">
+          <div class="boot-step-title">Power Good Signal</div>
+          <p>The <strong>PSU</strong> sends a "Power Good" signal to the <strong>Motherboard</strong>, confirming voltages are stable. The <strong>VRM</strong> then steps voltage down further to the precise level the CPU needs.</p>
+        </div>
+      </div>
+      <div class="boot-arrow">↓</div>
+      <div class="boot-step">
+        <div class="boot-num">3</div>
+        <div class="boot-content">
+          <div class="boot-step-title">CPU Wakes Up</div>
+          <p>The <strong>CPU</strong> receives power and begins executing its first instruction — a hardcoded address pointing to the BIOS/UEFI firmware stored on the motherboard chip.</p>
+        </div>
+      </div>
+      <div class="boot-arrow">↓</div>
+      <div class="boot-step">
+        <div class="boot-num">4</div>
+        <div class="boot-content">
+          <div class="boot-step-title">POST — Power-On Self Test</div>
+          <p>The BIOS runs a <em>POST</em>, checking that <strong>RAM</strong> is present and working, storage devices are connected (<strong>SSD</strong>), and the <strong>GPU</strong> is responding. If anything fails, it beeps an error code.</p>
+        </div>
+      </div>
+      <div class="boot-arrow">↓</div>
+      <div class="boot-step">
+        <div class="boot-num">5</div>
+        <div class="boot-content">
+          <div class="boot-step-title">Bootloader Found</div>
+          <p>The BIOS finds the boot device (your <strong>SSD</strong>) and loads the bootloader into <strong>RAM</strong>. The bootloader hands control over to the operating system kernel.</p>
+        </div>
+      </div>
+      <div class="boot-arrow">↓</div>
+      <div class="boot-step">
+        <div class="boot-num">6</div>
+        <div class="boot-content">
+          <div class="boot-step-title">OS Loads — You're In</div>
+          <p>The OS kernel is copied from the <strong>SSD</strong> into <strong>RAM</strong>. The <strong>CPU</strong> starts running OS processes, the <strong>GPU</strong> renders the login screen, and the <strong>Case Fans</strong> spin up to manage heat. You see the desktop.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THREE FLOWS SIDE BY SIDE -->
+  <div class="flow-grid">
+
+    <div class="flow-card reveal">
+      <div class="flow-card-header">
+        <span class="flow-icon">📡</span>
+        <div class="flow-card-title">Data Flow</div>
+      </div>
+      <p class="flow-desc">How data moves around the system every time you do anything.</p>
+      <div class="flow-chain">
+        <div class="flow-node ssd-node">SSD<span>Storage</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-node mb-node">Motherboard<span>Routes data</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-node ram-node">RAM<span>Active memory</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-node cpu-node">CPU<span>Processes</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-node gpu-node">GPU<span>Renders output</span></div>
+      </div>
+      <p class="flow-note">Data travels along the PCIe and chipset buses on the motherboard at billions of transfers per second.</p>
+    </div>
+
+    <div class="flow-card reveal">
+      <div class="flow-card-header">
+        <span class="flow-icon">🔋</span>
+        <div class="flow-card-title">Power Distribution</div>
+      </div>
+      <p class="flow-desc">How electricity from the wall reaches every component.</p>
+      <div class="flow-chain">
+        <div class="flow-node psu-node">PSU<span>Wall → DC power</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-node mb-node">24-pin Connector<span>Motherboard power</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-node vrm-node">VRM<span>CPU voltage</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-node gpu-node">8-pin Connector<span>GPU power</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-node ssd-node">SATA / M.2<span>Storage power</span></div>
+      </div>
+      <p class="flow-note">Each component needs a precise voltage. Too high = damage. Too low = crashes. The VRM and PSU keep everything stable.</p>
+    </div>
+
+    <div class="flow-card reveal">
+      <div class="flow-card-header">
+        <span class="flow-icon">🌡️</span>
+        <div class="flow-card-title">Thermal Management</div>
+      </div>
+      <p class="flow-desc">How the system stops itself from overheating.</p>
+      <div class="flow-chain">
+        <div class="flow-node cpu-node">CPU / GPU<span>Generate heat</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-node fan-node">Heatsink<span>Absorbs heat</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-node fan-node">Case Fans (intake)<span>Pull cool air in</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-node mb-node">Motherboard<span>Monitors temps</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-node fan-node">Case Fans (exhaust)<span>Push hot air out</span></div>
+      </div>
+      <p class="flow-note">If temperatures spike, the motherboard throttles the CPU/GPU speed automatically to prevent damage.</p>
     </div>
 
   </div>
