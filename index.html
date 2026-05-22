@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardboard PCr</title>
+<title>Cardboard PC – Components of a Computer</title>
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -238,9 +238,14 @@
           <div class="build-step-num">01</div>
           <div class="build-step-line"></div>
         </div>
-        <div class="build-step-right">
-          <div class="build-step-title">Measuring Real PC Dimensions</div>
-          <p>We began by researching the actual size of a standard PC case and its internal components. Using these measurements, we created a scaled diagram to ensure our cardboard model would be realistic and correctly proportioned.</p>
+        <div class="build-step-right" onclick="toggleStep(this)">
+          <div class="build-step-title-row">
+            <div class="build-step-title">Measuring Real PC Dimensions</div>
+            <div class="build-step-chevron">▼</div>
+          </div>
+          <div class="build-step-body">
+            <p>We began by researching the actual size of a standard PC case and its internal components. Using these measurements, we created a scaled diagram to ensure our cardboard model would be realistic and correctly proportioned.</p>
+          </div>
         </div>
       </div>
 
@@ -249,9 +254,14 @@
           <div class="build-step-num">02</div>
           <div class="build-step-line"></div>
         </div>
-        <div class="build-step-right">
-          <div class="build-step-title">Researching Component Shapes &amp; Designs</div>
-          <p>Next, we studied what each component looks like in real life — including the CPU, GPU, RAM, PSU, SSDs, motherboard, and connectors. We collected reference images to accurately recreate their shapes and layouts.</p>
+        <div class="build-step-right" onclick="toggleStep(this)">
+          <div class="build-step-title-row">
+            <div class="build-step-title">Researching Component Shapes &amp; Designs</div>
+            <div class="build-step-chevron">▼</div>
+          </div>
+          <div class="build-step-body">
+            <p>Next, we studied what each component looks like in real life — including the CPU, GPU, RAM, PSU, SSDs, motherboard, and connectors. We collected reference images to accurately recreate their shapes and layouts.</p>
+          </div>
         </div>
       </div>
 
@@ -260,9 +270,14 @@
           <div class="build-step-num">03</div>
           <div class="build-step-line"></div>
         </div>
-        <div class="build-step-right">
-          <div class="build-step-title">Identifying Correct Component Placement</div>
-          <p>We learned where each part is located inside an actual PC — including motherboard slots, power connectors, airflow paths, and how components interact. We then mapped these positions onto our diagram.</p>
+        <div class="build-step-right" onclick="toggleStep(this)">
+          <div class="build-step-title-row">
+            <div class="build-step-title">Identifying Correct Component Placement</div>
+            <div class="build-step-chevron">▼</div>
+          </div>
+          <div class="build-step-body">
+            <p>We learned where each part is located inside an actual PC — including motherboard slots, power connectors, airflow paths, and how components interact. We then mapped these positions onto our diagram.</p>
+          </div>
         </div>
       </div>
 
@@ -271,9 +286,14 @@
           <div class="build-step-num">04</div>
           <div class="build-step-line"></div>
         </div>
-        <div class="build-step-right">
-          <div class="build-step-title">Creating the Final Layout Diagram</div>
-          <p>Using all our research, we produced a final top-down diagram showing the exact placement of every component. This served as our blueprint for the cardboard build.</p>
+        <div class="build-step-right" onclick="toggleStep(this)">
+          <div class="build-step-title-row">
+            <div class="build-step-title">Creating the Final Layout Diagram</div>
+            <div class="build-step-chevron">▼</div>
+          </div>
+          <div class="build-step-body">
+            <p>Using all our research, we produced a final top-down diagram showing the exact placement of every component. This served as our blueprint for the cardboard build.</p>
+          </div>
         </div>
       </div>
 
@@ -281,9 +301,14 @@
         <div class="build-step-left">
           <div class="build-step-num">05</div>
         </div>
-        <div class="build-step-right">
-          <div class="build-step-title">Constructing the Cardboard PC Model</div>
-          <p>Finally, we cut and assembled each component out of cardboard, following the diagram for accuracy. We layered pieces to add depth, labelled each part, and arranged everything to match a real PC's internal structure.</p>
+        <div class="build-step-right" onclick="toggleStep(this)">
+          <div class="build-step-title-row">
+            <div class="build-step-title">Constructing the Cardboard PC Model</div>
+            <div class="build-step-chevron">▼</div>
+          </div>
+          <div class="build-step-body">
+            <p>Finally, we cut and assembled each component out of cardboard, following the diagram for accuracy. We layered pieces to add depth, labelled each part, and arranged everything to match a real PC's internal structure.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -625,6 +650,13 @@ function closeModal() {
 modalClose.addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ── BUILD STEP TOGGLE ── */
+function toggleStep(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.build-step-right.open').forEach(s => s.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
 
 /* ── PROGRESS RING ANIMATION ── */
 (function(){
