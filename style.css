@@ -1283,3 +1283,238 @@ footer .footer-logo span {
   from { opacity: 0; transform: translateY(-6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ── SCIENCE CARDS (flip on click) ── */
+#science { padding-top: 0; }
+
+.science-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+}
+
+.sci-card {
+  perspective: 1000px;
+  height: 220px;
+  cursor: pointer;
+}
+
+.sci-card-front,
+.sci-card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  padding: 2rem;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.sci-card {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.sci-card-front {
+  background: var(--card);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.6rem;
+  transition: border-color 0.3s, transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.sci-card:hover .sci-card-front,
+.sci-card.flipped .sci-card-front {
+  border-color: rgba(79,195,247,0.45);
+}
+
+.sci-card.flipped .sci-card-front {
+  transform: rotateY(180deg);
+}
+
+.sci-card-back {
+  background: linear-gradient(135deg, #141c2e, #1a2035);
+  border: 1px solid rgba(79,195,247,0.3);
+  transform: rotateY(180deg);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.sci-card.flipped .sci-card-back {
+  transform: rotateY(0deg);
+}
+
+.sci-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 10px rgba(79,195,247,0.3));
+  transition: transform 0.3s;
+}
+.sci-card:hover .sci-icon { transform: scale(1.15); }
+
+.sci-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.06em;
+}
+
+.sci-sublabel {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.sci-tap {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(79,195,247,0.4);
+  font-family: 'Orbitron', sans-serif;
+  margin-top: 0.3rem;
+  animation: tapPulse 2s ease-in-out infinite;
+}
+@keyframes tapPulse { 0%,100%{opacity:0.4} 50%{opacity:0.9} }
+
+.sci-back-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent2);
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+
+.sci-card-back p {
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: #b0b8cc;
+  font-weight: 300;
+  flex: 1;
+}
+.sci-card-back p strong { color: var(--accent); font-weight: 600; }
+
+/* ── THERMAL SECTION ── */
+#thermal { padding-top: 0; }
+
+.thermal-wrap {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+  align-items: start;
+}
+
+.thermal-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.thermal-fact {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.4rem;
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.thermal-fact:hover {
+  border-color: rgba(255,107,107,0.35);
+  transform: translateX(4px);
+}
+
+.thermal-fact-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 0.1rem;
+}
+
+.thermal-fact-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ff9a9a;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.thermal-fact p {
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: #b0b8cc;
+  font-weight: 300;
+}
+.thermal-fact p strong { color: var(--accent); font-weight: 600; }
+
+/* ── AIRFLOW DIAGRAM ── */
+.airflow-diagram-wrap {
+  position: sticky;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.airflow-label-top {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--accent2);
+  opacity: 0.6;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.airflow-diagram {
+  background: #0d1018;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+}
+
+.airflow-svg { display: block; width: 100%; height: auto; }
+
+.airflow-label-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.airflow-tag {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.7rem;
+  border-radius: 99px;
+  border: 1px solid;
+}
+.airflow-tag.intake  { color: #4fc3f7; border-color: rgba(79,195,247,0.3);  background: rgba(79,195,247,0.07); }
+.airflow-tag.exhaust { color: #ff6b6b; border-color: rgba(255,107,107,0.3); background: rgba(255,107,107,0.07); }
+
+@media (max-width: 960px) {
+  .thermal-wrap { grid-template-columns: 1fr; }
+  .airflow-diagram-wrap { position: static; }
+}
+
+@media (max-width: 600px) {
+  .science-grid { grid-template-columns: 1fr 1fr; padding: 0 1rem 3rem; }
+  .sci-card { height: 180px; }
+  .thermal-wrap { padding: 0 1rem 3rem; }
+}
