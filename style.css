@@ -1213,48 +1213,7 @@ footer .footer-logo span {
   .build-wrap { padding: 0 1rem 3rem; gap: 2rem; }
 }
 
-/* ── BUILD STEP EXPAND/COLLAPSE ── */
-.build-step-right {
-  cursor: pointer;
-  user-select: none;
-}
 
-.build-step-title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.build-step-chevron {
-  font-size: 0.65rem;
-  color: var(--muted);
-  transition: transform 0.3s, color 0.2s;
-  flex-shrink: 0;
-}
-
-.build-step-right.open .build-step-chevron {
-  transform: rotate(180deg);
-  color: var(--accent);
-}
-
-.build-step-body {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease, margin-top 0.3s;
-  margin-top: 0;
-}
-
-.build-step-right.open .build-step-body {
-  max-height: 200px;
-  opacity: 1;
-  margin-top: 0.9rem;
-}
-
-.build-step-right.open {
-  border-color: rgba(245,166,35,0.4);
-}
 
 /* ── BUILD STEP ACCORDION (v2 — replaces old rules) ── */
 .build-step-card {
