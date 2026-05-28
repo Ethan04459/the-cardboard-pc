@@ -34,14 +34,14 @@ body::before {
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 200;
-  padding: 0.9rem 2rem;
+  z-index: 300;
+  padding: 0.85rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(10,12,16,0.88);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(42,53,80,0.6);
+  background: rgba(10,12,16,0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(42,53,80,0.5);
 }
 
 .nav-logo {
@@ -49,8 +49,9 @@ nav {
   align-items: center;
   gap: 0.7rem;
   text-decoration: none;
+  z-index: 2;
 }
-.nav-logo img { height: 36px; width: 36px; object-fit: contain; border-radius: 6px; }
+.nav-logo img { height: 34px; width: 34px; object-fit: contain; border-radius: 6px; }
 .nav-logo-text {
   font-family: 'Orbitron', sans-serif;
   font-weight: 900;
@@ -59,17 +60,117 @@ nav {
   letter-spacing: 0.08em;
 }
 
-.nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a {
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s;
-  font-family: 'Orbitron', sans-serif;
+/* hamburger button */
+.nav-hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(79,195,247,0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s, border-color 0.2s;
 }
-.nav-links a:hover { color: var(--accent2); }
+.nav-hamburger:hover {
+  background: rgba(79,195,247,0.08);
+  border-color: rgba(79,195,247,0.45);
+}
+.nav-hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--accent2);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+  transform-origin: center;
+}
+/* animate to X when open */
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* full-screen backdrop */
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: rgba(5, 8, 14, 0.7);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.nav-backdrop.open { opacity: 1; pointer-events: all; }
+
+/* slide-in drawer */
+.nav-drawer {
+  position: fixed;
+  top: 0; right: 0;
+  width: 280px;
+  height: 100vh;
+  z-index: 260;
+  background: #0e1118;
+  border-left: 1px solid rgba(42,53,80,0.8);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  box-shadow: -20px 0 60px rgba(0,0,0,0.5);
+}
+.nav-drawer.open { transform: translateX(0); }
+
+.nav-drawer-inner {
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 0 2rem;
+}
+
+.drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-left: 2px solid transparent;
+  transition: color 0.2s, background 0.2s, border-color 0.2s, padding-left 0.2s;
+  position: relative;
+}
+.drawer-link::before {
+  content: attr(data-num);
+  font-size: 0.6rem;
+  color: var(--accent);
+  opacity: 0.5;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+.drawer-link:hover {
+  color: var(--text);
+  background: rgba(79,195,247,0.05);
+  border-left-color: var(--accent2);
+  padding-left: 2.4rem;
+}
+.drawer-link:hover::before { opacity: 1; }
+
+/* divider every 3 items */
+.drawer-link:nth-child(3)::after,
+.drawer-link:nth-child(6)::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 2rem; right: 2rem;
+  height: 1px;
+  background: rgba(42,53,80,0.6);
+}
 
 /* ── HERO ── */
 .hero {
