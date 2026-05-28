@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardboard PC</title>
+<title>Cardboard PC – Components of a Computer</title>
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -16,17 +16,25 @@
     <img src="logo.png" alt="Cardboard PC Logo" onerror="this.style.display='none'">
     <span class="nav-logo-text">Cardboard PC</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="#intro">Introduction</a></li>
-    <li><a href="#components">Components</a></li>
-    <li><a href="#build">Build Process</a></li>
-    <li><a href="#applications">Applications</a></li>
-    <li><a href="#workflow">How It Works</a></li>
-    <li><a href="#science">The Science</a></li>
-    <li><a href="#thermal">Thermal</a></li>
-    <li><a href="#conclusion">Conclusion</a></li>
-    <li><a href="#team">Team</a></li>
-  </ul>
+
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="nav-drawer" id="nav-drawer">
+    <div class="nav-drawer-inner">
+      <a href="#intro"        class="drawer-link" data-num="01">Introduction</a>
+      <a href="#components"   class="drawer-link" data-num="02">Components</a>
+      <a href="#build"        class="drawer-link" data-num="03">Build Process</a>
+      <a href="#applications" class="drawer-link" data-num="04">Applications</a>
+      <a href="#workflow"     class="drawer-link" data-num="05">How It Works</a>
+      <a href="#science"      class="drawer-link" data-num="06">The Science</a>
+      <a href="#thermal"      class="drawer-link" data-num="07">Thermal</a>
+      <a href="#conclusion"   class="drawer-link" data-num="08">Conclusion</a>
+      <a href="#team"         class="drawer-link" data-num="09">Team</a>
+    </div>
+  </div>
+  <div class="nav-backdrop" id="nav-backdrop"></div>
 </nav>
 
 <!-- HERO -->
@@ -1027,7 +1035,37 @@ modalClose.addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-/* ── BUILD STEP ACCORDION ── */
+/* ── HAMBURGER NAV ── */
+(function(){
+  const btn      = document.getElementById('nav-hamburger');
+  const drawer   = document.getElementById('nav-drawer');
+  const backdrop = document.getElementById('nav-backdrop');
+
+  function openMenu() {
+    btn.classList.add('open');
+    drawer.classList.add('open');
+    backdrop.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    btn.classList.remove('open');
+    drawer.classList.remove('open');
+    backdrop.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', () => btn.classList.contains('open') ? closeMenu() : openMenu());
+  backdrop.addEventListener('click', closeMenu);
+
+  document.querySelectorAll('.drawer-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+})();
+
+
 document.querySelectorAll('.build-step-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const body    = btn.nextElementSibling;
