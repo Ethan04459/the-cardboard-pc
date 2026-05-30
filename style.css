@@ -2340,3 +2340,12 @@ footer .footer-logo span {
 .delay-3 { transition-delay: 0.15s !important; }
 .delay-4 { transition-delay: 0.20s !important; }
 .delay-5 { transition-delay: 0.25s !important; }
+
+.conclusion-quote-attr {
+  margin-top: 1rem;
+  font-size: 0.78rem;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  opacity: 0.8;
+}
