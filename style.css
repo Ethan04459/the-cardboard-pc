@@ -1760,58 +1760,101 @@ footer .footer-logo span {
 }
 
 /* ── input/process/store/output cards ── */
+/* ── WHAT DOES A PC DO — flip cards ── */
 .basics-do-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  gap: 1.2rem;
   max-width: 1100px;
   margin: 0 auto 4rem;
   padding: 0 2rem;
 }
 
-.basics-do-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.8rem 1.4rem;
-  text-align: center;
+.flip-card {
+  perspective: 1000px;
+  height: 220px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.flip-card:hover .flip-card-inner,
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.7rem;
-  transition: border-color 0.3s, transform 0.3s;
-  position: relative;
-  overflow: hidden;
-  transition-delay: calc(var(--i) * 0.08s);
+  padding: 1.6rem 1.2rem;
+  text-align: center;
+  border: 1px solid var(--border);
 }
-.basics-do-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent3), transparent);
-  transform: scaleX(0);
-  transition: transform 0.4s ease;
-}
-.basics-do-card:hover { border-color: rgba(167,139,250,0.4); transform: translateY(-5px); }
-.basics-do-card:hover::after { transform: scaleX(1); }
 
-.basics-do-icon { font-size: 2.2rem; }
-.basics-do-title {
+.flip-front {
+  background: var(--card);
+  transition: border-color 0.3s;
+}
+.flip-card:hover .flip-front { border-color: rgba(167,139,250,0.4); }
+
+.flip-back {
+  background: linear-gradient(135deg, #1a1535, #12161e);
+  border-color: rgba(167,139,250,0.4);
+  transform: rotateY(180deg);
+}
+
+.flip-front-icon { font-size: 2.8rem; line-height: 1; }
+
+.flip-front-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--accent3);
   letter-spacing: 0.07em;
 }
-.basics-do-card p {
-  font-size: 0.8rem;
-  color: #9aa3b8;
+
+.flip-front-hint {
+  font-size: 0.62rem;
+  color: rgba(167,139,250,0.4);
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+}
+
+.flip-back-icon { font-size: 1.4rem; }
+
+.flip-back-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent3);
+  letter-spacing: 0.06em;
+}
+
+.flip-back p {
+  font-size: 0.78rem;
+  color: #b0b8cc;
   line-height: 1.7;
   font-weight: 300;
 }
 
-/* ── types of PC ── */
+/* ── TYPES OF PC — spotlight hover cards ── */
 .basics-types-row {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1824,35 +1867,79 @@ footer .footer-logo span {
 .basics-type-card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.5rem 1.2rem;
+  border-radius: 12px;
+  padding: 1.6rem 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 0.6rem;
-  transition: border-color 0.3s, transform 0.3s;
   position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
-.basics-type-card:hover { border-color: rgba(245,166,35,0.4); transform: translateY(-4px); }
 
-.basics-type-icon { font-size: 2rem; }
+.basics-type-card::before {
+  content: '';
+  position: absolute;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,166,35,0.18) 0%, transparent 70%);
+  top: -60px; left: 50%;
+  transform: translateX(-50%) scaleY(0);
+  transition: transform 0.4s ease, top 0.4s ease;
+  pointer-events: none;
+}
+.basics-type-card:hover::before {
+  transform: translateX(-50%) scaleY(1);
+  top: -20px;
+}
+
+.basics-type-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+.basics-type-card:hover::after { transform: scaleX(1); }
+
+.basics-type-card:hover {
+  border-color: rgba(245,166,35,0.45);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(245,166,35,0.12);
+}
+
+.basics-type-icon {
+  font-size: 2.2rem;
+  transition: transform 0.35s ease;
+  position: relative; z-index: 1;
+}
+.basics-type-card:hover .basics-type-icon { transform: scale(1.2) translateY(-3px); }
+
 .basics-type-name {
   font-family: 'Orbitron', sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
   color: var(--accent);
   letter-spacing: 0.06em;
+  position: relative; z-index: 1;
 }
+
 .basics-type-desc {
-  font-size: 0.75rem;
+  font-size: 0.73rem;
   color: #9aa3b8;
   line-height: 1.65;
   font-weight: 300;
+  position: relative; z-index: 1;
 }
+
 .basics-type-tag {
   margin-top: auto;
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 0.08em;
   color: var(--accent2);
@@ -1860,6 +1947,13 @@ footer .footer-logo span {
   border: 1px solid rgba(79,195,247,0.2);
   border-radius: 99px;
   padding: 0.2rem 0.7rem;
+  position: relative; z-index: 1;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+.basics-type-card:hover .basics-type-tag {
+  background: rgba(245,166,35,0.1);
+  border-color: rgba(245,166,35,0.35);
+  color: var(--accent);
 }
 
 /* ── ticker ── */
@@ -1919,6 +2013,7 @@ footer .footer-logo span {
 @media (max-width: 900px) {
   .basics-hero-card   { grid-template-columns: 1fr; gap: 2rem; }
   .basics-do-grid     { grid-template-columns: repeat(2, 1fr); }
+  .flip-card          { height: 200px; }
   .basics-types-row   { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
