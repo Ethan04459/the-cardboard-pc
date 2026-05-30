@@ -2349,3 +2349,230 @@ footer .footer-logo span {
   color: var(--accent);
   opacity: 0.8;
 }
+
+/* ══════════════════════════════════
+   SCROLL JOURNEY
+══════════════════════════════════ */
+
+/* tall outer scroll container — 8 panels × 100vh */
+.journey-outer {
+  height: 800vh;
+  position: relative;
+}
+
+/* sticky inner that stays in view while outer scrolls */
+.journey-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* animated background world */
+.journey-world {
+  position: absolute;
+  inset: -20%;
+  transition: transform 1.2s cubic-bezier(0.4,0,0.2,1), filter 1.2s ease;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* grid floor */
+.journey-grid-floor {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(79,195,247,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,195,247,0.07) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 75%);
+}
+
+/* centre glow pulse */
+.journey-centre-glow {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(79,195,247,0.12) 0%, rgba(245,166,35,0.05) 40%, transparent 70%);
+  animation: journeyPulse 4s ease-in-out infinite;
+}
+@keyframes journeyPulse {
+  0%,100% { transform: translate(-50%,-50%) scale(1);   opacity: 0.8; }
+  50%     { transform: translate(-50%,-50%) scale(1.15); opacity: 1; }
+}
+
+/* stars */
+.journey-stars {
+  position: absolute;
+  inset: 0;
+}
+.journey-stars span {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  animation: twinkle 3s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%,100% { opacity: 0.2; transform: scale(1); }
+  50%     { opacity: 0.9; transform: scale(1.5); }
+}
+
+/* individual panels */
+.journey-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.85) translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1),
+              transform 0.7s cubic-bezier(0.34,1.2,0.64,1);
+}
+
+.journey-panel.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: all;
+}
+
+.journey-panel.past {
+  opacity: 0;
+  transform: scale(1.1) translateY(-20px);
+}
+
+/* glass panel content card */
+.journey-panel-inner {
+  position: relative;
+  z-index: 10;
+  max-width: 580px;
+  width: 90%;
+  background: rgba(10, 12, 18, 0.78);
+  border: 1px solid rgba(79,195,247,0.25);
+  border-radius: 20px;
+  padding: 3rem 3.5rem;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 0 0 1px rgba(79,195,247,0.1),
+    0 30px 80px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.jp-tag {
+  display: inline-block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  background: rgba(79,195,247,0.08);
+  border: 1px solid rgba(79,195,247,0.2);
+  border-radius: 99px;
+  padding: 0.3rem 0.9rem;
+  margin-bottom: 1.4rem;
+}
+
+.jp-icon {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 20px rgba(79,195,247,0.4));
+}
+
+.jp-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+.jp-title span {
+  background: linear-gradient(135deg, var(--accent), #ffe082);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.jp-body {
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: #b0b8cc;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+}
+
+.jp-chip-row {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.jp-chip {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  padding: 0.3rem 0.8rem;
+  border-radius: 99px;
+  border: 1px solid;
+}
+.jp-chip.orange { color: var(--accent);  border-color: rgba(245,166,35,0.4);  background: rgba(245,166,35,0.08); }
+.jp-chip.blue   { color: var(--accent2); border-color: rgba(79,195,247,0.4);  background: rgba(79,195,247,0.08); }
+.jp-chip.purple { color: var(--accent3); border-color: rgba(167,139,250,0.4); background: rgba(167,139,250,0.08); }
+.jp-chip.green  { color: #48c78e;        border-color: rgba(72,199,142,0.4);  background: rgba(72,199,142,0.08); }
+
+.jp-scroll-hint {
+  margin-top: 1.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(79,195,247,0.4);
+  font-family: 'Orbitron', sans-serif;
+  animation: hintBounce 2s ease-in-out infinite;
+}
+@keyframes hintBounce {
+  0%,100% { transform: translateY(0); opacity: 0.4; }
+  50%     { transform: translateY(5px); opacity: 0.9; }
+}
+
+/* progress dots */
+.journey-dots {
+  position: absolute;
+  right: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  z-index: 20;
+}
+
+.jdot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(79,195,247,0.2);
+  border: 1px solid rgba(79,195,247,0.3);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.jdot.active {
+  background: var(--accent2);
+  transform: scale(1.5);
+  box-shadow: 0 0 10px rgba(79,195,247,0.6);
+}
+
+@media (max-width: 600px) {
+  .journey-panel-inner { padding: 2rem 1.5rem; }
+  .journey-dots { right: 1rem; }
+  .jp-icon { font-size: 2.5rem; }
+}
