@@ -43,6 +43,7 @@
   <div class="hero-bg"></div>
   <div class="grid-lines"></div>
   <div class="scanline"></div>
+  <div class="hero-particles" id="hero-particles"></div>
 
   <div class="hero-logo-wrap">
     <img src="logo.png" alt="The Cardboard PC Logo" onerror="this.style.display='none'">
@@ -75,21 +76,32 @@
 
 <!-- INTRODUCTION -->
 <section id="intro">
-  <div class="reveal">
-    <div class="section-label">Where it all began</div>
-    <h2 class="section-title">Introduction</h2>
-    <div class="sep" style="margin-left:0"></div>
-  </div>
-  <div class="prose-block reveal">
-    <p>
-      Have you ever wondered what's actually inside a computer? Most people use computers every day — but very few have ever seen the components that make them work. We wanted to change that. Our project, <strong style="color:var(--accent)">The Cardboard PC</strong>, set out to build a full-scale physical model of a desktop computer using nothing but cardboard and craft materials.
-    </p>
-    <p>
-      Our goal was simple: make the inside of a PC accessible, understandable, and tangible for everyone — no technical background needed. By recreating each component by hand, we wanted people to be able to look at our model and immediately understand what each part does, how it connects to the rest of the system, and why it matters.
-    </p>
-    <p>
-      This website is an extension of that model — a digital companion that lets you explore every component in detail, see how they apply to real-world tasks, and understand why the hardware inside a computer is so important.
-    </p>
+  <div class="intro-wrap">
+
+    <div class="intro-left reveal-left">
+      <div class="section-label">Where it all began</div>
+      <h2 class="section-title">Introduction</h2>
+      <div class="sep" style="margin-left:0"></div>
+      <div class="intro-question reveal-left">
+        Have you ever wondered what's <span class="hl">actually inside</span> a computer?
+      </div>
+    </div>
+
+    <div class="intro-right">
+      <div class="intro-card reveal-right" style="transition-delay:0s">
+        <div class="intro-card-num">01</div>
+        <p>Most people use computers every day — but very few have ever seen the components that make them work. We wanted to change that. Our project, <strong class="intro-highlight">The Cardboard PC</strong>, set out to build a full-scale physical model of a desktop computer using nothing but cardboard and craft materials.</p>
+      </div>
+      <div class="intro-card reveal-right" style="transition-delay:0.15s">
+        <div class="intro-card-num">02</div>
+        <p>Our goal was simple: make the inside of a PC <strong class="intro-highlight2">accessible, understandable, and tangible</strong> for everyone — no technical background needed. By recreating each component by hand, we wanted people to immediately understand what each part does and why it matters.</p>
+      </div>
+      <div class="intro-card reveal-right" style="transition-delay:0.3s">
+        <div class="intro-card-num">03</div>
+        <p>This website is an extension of that model — a digital companion that lets you explore every component in detail, see how they apply to real-world tasks, and understand why the hardware inside a computer is so important.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1057,22 +1069,60 @@
 
 <!-- CONCLUSION -->
 <section id="conclusion">
-  <div class="reveal">
-    <div class="section-label">What we achieved</div>
-    <h2 class="section-title">Conclusion</h2>
-    <div class="sep" style="margin-left:0"></div>
+
+  <div class="conclusion-wrap">
+    <div class="conclusion-header reveal">
+      <div class="section-label">What we achieved</div>
+      <h2 class="section-title">Conclusion</h2>
+      <div class="sep" style="margin-left:0"></div>
+    </div>
+
+    <div class="conclusion-grid">
+      <div class="conclusion-stat-card reveal-zoom" style="transition-delay:0s">
+        <div class="conclusion-stat-icon">📦</div>
+        <div class="conclusion-stat-num">13</div>
+        <div class="conclusion-stat-label">Components Recreated</div>
+      </div>
+      <div class="conclusion-stat-card reveal-zoom" style="transition-delay:0.1s">
+        <div class="conclusion-stat-icon">🔬</div>
+        <div class="conclusion-stat-num">5</div>
+        <div class="conclusion-stat-label">Build Stages</div>
+      </div>
+      <div class="conclusion-stat-card reveal-zoom" style="transition-delay:0.2s">
+        <div class="conclusion-stat-icon">👥</div>
+        <div class="conclusion-stat-num">4</div>
+        <div class="conclusion-stat-label">Team Members</div>
+      </div>
+      <div class="conclusion-stat-card reveal-zoom" style="transition-delay:0.3s">
+        <div class="conclusion-stat-icon">⚡</div>
+        <div class="conclusion-stat-num">90%</div>
+        <div class="conclusion-stat-label">Project Complete</div>
+      </div>
+    </div>
+
+    <div class="conclusion-body">
+      <div class="conclusion-quote reveal">
+        <div class="conclusion-quote-mark">"</div>
+        <p>Understanding technology doesn't require expensive equipment or a classroom. It just takes curiosity and a willingness to build.</p>
+      </div>
+
+      <div class="conclusion-points">
+        <div class="conclusion-point reveal-left" style="transition-delay:0s">
+          <div class="conclusion-point-icon">✅</div>
+          <p>We successfully built a complete, labelled model of a desktop computer, proving it can be done with just cardboard and craft materials.</p>
+        </div>
+        <div class="conclusion-point reveal-left" style="transition-delay:0.1s">
+          <div class="conclusion-point-icon">🧠</div>
+          <p>Every component we recreated deepened our understanding of <em>why</em> it matters and how it fits into the bigger picture of a working computer.</p>
+        </div>
+        <div class="conclusion-point reveal-left" style="transition-delay:0.2s">
+          <div class="conclusion-point-icon">🌟</div>
+          <p>We hope anyone who sees our project — at the STEM Fair or on this site — walks away with computers feeling a little less mysterious.</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="prose-block reveal">
-    <p>
-      Through The Cardboard PC project, we successfully built a complete, labelled model of a desktop computer — and in doing so, proved that understanding technology doesn't require expensive equipment or a classroom. It just takes curiosity and a willingness to build.
-    </p>
-    <p>
-      Every component we recreated — from the CPU to the case fans — helped us understand not just what each part does, but <em>why</em> it matters and how it fits into the bigger picture of a working computer. The process of building it forced us to research, collaborate, and explain ideas clearly, which deepened our own understanding along the way.
-    </p>
-    <p>
-      We hope that anyone who interacts with our project — whether at the STEM Fair or on this website — walks away with a clearer picture of what's inside the machine they use every day. If we've made computers even a little less mysterious, then we've done our job.
-    </p>
-  </div>
+
 </section>
 
 <!-- TEAM -->
@@ -1196,7 +1246,38 @@ modalClose.addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-/* ── FACTS TICKER ── */
+/* ── PARTICLES ── */
+(function(){
+  const container = document.getElementById('hero-particles');
+  if (!container) return;
+  const colors = ['rgba(79,195,247,0.7)','rgba(245,166,35,0.7)','rgba(167,139,250,0.7)'];
+  for (let i = 0; i < 28; i++) {
+    const s = document.createElement('span');
+    s.style.cssText = `
+      left: ${Math.random()*100}%;
+      bottom: ${Math.random()*20}%;
+      --dur: ${4 + Math.random()*8}s;
+      --delay: ${Math.random()*8}s;
+      width: ${1+Math.random()*2}px;
+      height: ${1+Math.random()*2}px;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+    `;
+    container.appendChild(s);
+  }
+})();
+
+/* ── CURSOR GLOW ── */
+(function(){
+  const glow = document.createElement('div');
+  glow.className = 'cursor-glow';
+  document.body.appendChild(glow);
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top  = e.clientY + 'px';
+  });
+})();
+
+
 (function(){
   const inner = document.getElementById('ticker-inner');
   if (!inner) return;
@@ -1311,7 +1392,7 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.08 });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom, .reveal-group').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
