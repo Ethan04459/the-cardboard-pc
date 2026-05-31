@@ -73,7 +73,8 @@ nav {
   border: 1px solid rgba(79,195,247,0.2);
   border-radius: 8px;
   cursor: pointer;
-  z-index: 2;
+  z-index: 310;
+  position: relative;
   transition: background 0.2s, border-color 0.2s;
 }
 .nav-hamburger:hover {
