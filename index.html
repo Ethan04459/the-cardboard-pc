@@ -8,6 +8,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
+  
+  <script src="https://cdn.jotfor.ms/s/static/latest/static/feedback2.js"></script>
+  <script>
+    var componentID = new JotformFeedback({
+      
+  type: false,
+  width: 700,
+  height: 500,
+  fontColor: "#FFFFFF",
+  background: "#F59202",
+  isCardForm: false,
+  formId: "261545235953057"
+  ,
+      buttonText: "Feedback",
+      buttonSide: "left",
+      buttonAlign: "center",
+      base: "https://form.jotform.com/",
+    }).componentID;
+  </script>
+  <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+  <script>window.jotformEmbedHandler("iframe[id='" + componentID + "_iframe']", "https://form.jotform.com/")</script>
 <body>
 
 <!-- NAV -->
