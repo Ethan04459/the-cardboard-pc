@@ -1401,7 +1401,7 @@
     <img src="logo.png" alt="The Cardboard PC" onerror="this.style.display='none'">
     <span>THE CARDBOARD PC</span>
   </div>
-  © 2026 The Cardboard PC · All Rights Reserved · STEM Fair 2026
+  © 2026 The PC Project · All Rights Reserved · STEM Fair 2026
 </footer>
 
 <script>
@@ -1504,7 +1504,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
   let current  = 0;
   let active   = false;
   let cooldown = false;
-  let entering = false; /* true while smooth-scrolling to snap position */
+  let entering = false;
+  let exiting  = false; /* block re-entry while scrolling away */
 
   function showPanel(idx) {
     idx = Math.max(0, Math.min(PANELS - 1, idx));
@@ -1520,16 +1521,12 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
     current = idx;
   }
 
-  /* snap the page so the journey section perfectly fills the viewport,
-     then lock. Called once as the user scrolls into range. */
   function snapAndLock() {
-    if (active || entering) return;
+    if (active || entering || exiting) return;
     entering = true;
-    /* smooth scroll the outer to top of viewport */
     outer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    /* wait for smooth scroll to finish (~500ms), then lock */
     setTimeout(() => {
-      active = true;
+      active   = true;
       entering = false;
       document.body.style.overflow = 'hidden';
       showPanel(current);
@@ -1537,15 +1534,23 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
   }
 
   function exit(dir) {
-    active = false;
+    active  = false;
+    exiting = true;
     document.body.style.overflow = '';
+
     if (dir > 0) {
+      /* reset to panel 0 for next time user scrolls back */
+      current = 0;
+      showPanel(0);
       const next = outer.nextElementSibling;
       if (next) next.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
       const prev = outer.previousElementSibling;
       if (prev) prev.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
+
+    /* allow re-entry only after the page has scrolled well clear */
+    setTimeout(() => { exiting = false; }, 1200);
   }
 
   function tryAdvance(dir) {
@@ -1558,7 +1563,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
     showPanel(next);
   }
 
-  /* ── intercept wheel while active ── */
+  /* intercept wheel while active */
   document.addEventListener('wheel', e => {
     if (!active) return;
     e.preventDefault();
@@ -1566,7 +1571,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
     tryAdvance(e.deltaY > 0 ? 1 : -1);
   }, { passive: false, capture: true });
 
-  /* ── touch ── */
+  /* touch */
   let touchY = null;
   document.addEventListener('touchstart', e => { if (active) touchY = e.touches[0].clientY; }, { passive: true });
   document.addEventListener('touchend', e => {
@@ -1576,21 +1581,20 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
     touchY = null;
   }, { passive: true });
 
-  /* ── keyboard ── */
+  /* keyboard */
   document.addEventListener('keydown', e => {
     if (!active) return;
     if (['ArrowDown','ArrowRight','PageDown'].includes(e.key)) { e.preventDefault(); tryAdvance(1); }
     if (['ArrowUp','ArrowLeft','PageUp'].includes(e.key))      { e.preventDefault(); tryAdvance(-1); }
   });
 
-  /* ── dot clicks ── */
+  /* dot clicks */
   dots.forEach((d, i) => d.addEventListener('click', () => { if (active) showPanel(i); }));
 
-  /* ── entry detection via scroll position ── */
+  /* entry detection */
   window.addEventListener('scroll', () => {
-    if (active || entering) return;
+    if (active || entering || exiting) return;
     const rect = outer.getBoundingClientRect();
-    /* trigger when the section is at least 40% visible */
     if (rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.4) {
       snapAndLock();
     }
