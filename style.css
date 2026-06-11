@@ -760,9 +760,14 @@ nav {
   border-radius: 8px;
   padding: 1.5rem;
   text-align: center;
-  transition: border-color 0.3s, transform 0.3s;
+  cursor: pointer;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
-.member-card:hover { border-color: var(--accent2); transform: translateY(-4px); }
+.member-card:hover {
+  border-color: var(--accent2);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(79,195,247,0.12);
+}
 
 .avatar {
   width: 56px; height: 56px;
@@ -773,13 +778,28 @@ nav {
   font-weight: 700; font-size: 1.1rem;
   color: #0a0c10;
   margin: 0 auto 0.8rem;
+  transition: transform 0.3s;
 }
+.member-card:hover .avatar { transform: scale(1.1); }
+
 .member-card .name {
   font-family: 'Orbitron', sans-serif;
   font-size: 0.72rem; font-weight: 700;
   letter-spacing: 0.05em; color: var(--text); margin-bottom: 0.3rem;
 }
 .member-card .role { font-size: 0.72rem; color: var(--muted); }
+
+.member-hint {
+  margin-top: 0.7rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  color: rgba(79,195,247,0.35);
+  transition: color 0.2s;
+}
+.member-card:hover .member-hint { color: var(--accent2); }
+
 
 /* ── FOOTER ── */
 footer {
@@ -2692,3 +2712,15 @@ footer .footer-logo span {
 @media (max-width: 700px) {
   .qna-grid { grid-template-columns: 1fr; padding: 0 1rem 3rem; }
 }
+
+/* ── TEAM MODAL ICON (initials instead of emoji) ── */
+#team-modal-icon {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  color: var(--accent2);
+}
+.modal.orange #team-modal-icon { color: var(--accent); }
+.modal.purple #team-modal-icon { color: var(--accent3); }
+.modal.green  #team-modal-icon { color: #48c78e; }
