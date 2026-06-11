@@ -3,32 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Cardboard PC</title>
+<title>The Cardboard PC – Components of a Computer</title>
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-  
-  <script src="https://cdn.jotfor.ms/s/static/latest/static/feedback2.js"></script>
-  <script>
-    var componentID = new JotformFeedback({
-      
-  type: false,
-  width: 700,
-  height: 500,
-  fontColor: "#FFFFFF",
-  background: "#F59202",
-  isCardForm: false,
-  formId: "261545235953057"
-  ,
-      buttonText: "Feedback",
-      buttonSide: "left",
-      buttonAlign: "center",
-      base: "https://form.jotform.com/",
-    }).componentID;
-  </script>
-  <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
-  <script>window.jotformEmbedHandler("iframe[id='" + componentID + "_iframe']", "https://form.jotform.com/")</script>
 <body>
 
 <!-- NAV -->
@@ -1391,30 +1370,52 @@
     <div class="section-label">Who made this</div>
     <h2 class="section-title">The <span class="hl">Team</span></h2>
     <div class="sep" style="margin-left:0"></div>
+    <p class="section-desc" style="margin-left:0">Click on a team member to see their role.</p>
   </div>
   <div class="team-grid reveal-right">
-    <div class="member-card">
+    <div class="member-card" data-member="ethan">
       <div class="avatar">EW</div>
       <div class="name">Ethan Wong</div>
-      <div class="role">Builder &amp; Researcher</div>
+      <div class="role">Lead Builder &amp; Web Developer</div>
+      <div class="member-hint">tap to view role</div>
     </div>
-    <div class="member-card">
+    <div class="member-card" data-member="david">
+      <div class="avatar">DB</div>
+      <div class="name">David Barbulescu</div>
+      <div class="role">Concept &amp; Co-Builder</div>
+      <div class="member-hint">tap to view role</div>
+    </div>
+    <div class="member-card" data-member="avery">
       <div class="avatar">AY</div>
       <div class="name">Avery Yuen</div>
       <div class="role">Builder &amp; Researcher</div>
+      <div class="member-hint">tap to view role</div>
     </div>
-    <div class="member-card">
-      <div class="avatar">DB</div>
-      <div class="name">David Barbulescu</div>
-      <div class="role">Builder &amp; Researcher</div>
-    </div>
-    <div class="member-card">
+    <div class="member-card" data-member="parker">
       <div class="avatar">PB</div>
       <div class="name">Parker Bailey</div>
       <div class="role">Builder &amp; Researcher</div>
+      <div class="member-hint">tap to view role</div>
     </div>
   </div>
 </section>
+
+<!-- TEAM MEMBER MODAL -->
+<div class="modal-overlay" id="team-modal-overlay">
+  <div class="modal" id="team-modal">
+    <div class="modal-top-bar"></div>
+    <button class="modal-close" id="team-modal-close">✕</button>
+    <div class="modal-header">
+      <div class="modal-icon" id="team-modal-icon"></div>
+      <div class="modal-titles">
+        <div class="modal-abbr" id="team-modal-name"></div>
+        <div class="modal-full" id="team-modal-role"></div>
+      </div>
+    </div>
+    <div class="modal-body" id="team-modal-body"></div>
+  </div>
+</div>
+
 
 <!-- FOOTER -->
 <footer>
@@ -1422,7 +1423,7 @@
     <img src="logo.png" alt="The Cardboard PC" onerror="this.style.display='none'">
     <span>THE CARDBOARD PC</span>
   </div>
-  © 2026 The Cardboard PC · All Rights Reserved · STEM Fair 2026
+  © 2026 The PC Project · All Rights Reserved · STEM Fair 2026
 </footer>
 
 <script>
@@ -1566,8 +1567,9 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
       const next = outer.nextElementSibling;
       if (next) next.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-      const prev = outer.previousElementSibling;
-      if (prev) prev.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      /* scroll to just above the journey so it's out of view */
+      const target = outer.offsetTop - window.innerHeight;
+      window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
     }
 
     /* allow re-entry only after the page has scrolled well clear */
@@ -1694,6 +1696,98 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 })();
 
 
+/* ── TEAM MEMBER MODAL ── */
+const teamMembers = {
+  ethan: {
+    initials: "EW",
+    name: "Ethan Wong",
+    role: "Lead Builder & Web Developer",
+    color: "orange",
+    desc: "Ethan was the main builder of the cardboard PC model, leading the construction of every component from the motherboard to the case fans. He also designed and built this entire website, bringing the project to life online.",
+    bullets: [
+      "Led the physical construction of the cardboard model",
+      "Designed and developed this website from scratch",
+      "Coordinated the overall build process and layout"
+    ]
+  },
+  david: {
+    initials: "DB",
+    name: "David Barbulescu",
+    role: "Concept & Co-Builder",
+    color: "purple",
+    desc: "David came up with the original idea for The Cardboard PC project, and worked alongside the team to bring that idea into a physical model.",
+    bullets: [
+      "Came up with the original concept for the project",
+      "Helped build and assemble the cardboard components",
+      "Contributed ideas throughout the design process"
+    ]
+  },
+  avery: {
+    initials: "AY",
+    name: "Avery Yuen",
+    role: "Builder & Researcher",
+    color: "green",
+    desc: "Avery assisted with both researching how real PC components work and helping construct the cardboard model, ensuring everything was accurate and well put together.",
+    bullets: [
+      "Researched real PC component shapes and specifications",
+      "Assisted with cutting, assembling, and labelling parts",
+      "Helped ensure accuracy of the final layout"
+    ]
+  },
+  parker: {
+    initials: "PB",
+    name: "Parker Bailey",
+    role: "Builder & Researcher",
+    color: "",
+    desc: "Parker assisted with both researching how real PC components work and helping construct the cardboard model, ensuring everything was accurate and well put together.",
+    bullets: [
+      "Researched component placement and PC layouts",
+      "Assisted with cutting, assembling, and labelling parts",
+      "Helped test and refine the final model"
+    ]
+  }
+};
+
+(function(){
+  const overlay  = document.getElementById('team-modal-overlay');
+  const modal    = document.getElementById('team-modal');
+  const icon     = document.getElementById('team-modal-icon');
+  const nameEl   = document.getElementById('team-modal-name');
+  const roleEl   = document.getElementById('team-modal-role');
+  const bodyEl   = document.getElementById('team-modal-body');
+  const closeBtn = document.getElementById('team-modal-close');
+
+  function open(member) {
+    const m = teamMembers[member];
+    if (!m) return;
+    icon.textContent = m.initials;
+    nameEl.textContent = m.name;
+    roleEl.textContent = m.role;
+
+    const bulletsHTML = m.bullets.length
+      ? `<ul>${m.bullets.map(b => `<li>${b}</li>`).join('')}</ul>`
+      : '';
+    bodyEl.innerHTML = `<p>${m.desc}</p>${bulletsHTML}`;
+
+    modal.className = `modal ${m.color}`;
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.member-card').forEach(card => {
+    card.addEventListener('click', () => open(card.dataset.member));
+  });
+
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('active')) close(); });
+})();
+
 /* ── Q&A ACCORDION ── */
 document.querySelectorAll('.qna-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -1791,5 +1885,25 @@ const observer = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom, .reveal-group').forEach(el => observer.observe(el));
 </script>
+<!-- JOTFORM FEEDBACK -->
+<script src="https://cdn.jotfor.ms/s/static/latest/static/feedback2.js"></script>
+<script>
+  var componentID = new JotformFeedback({
+    type: false,
+    width: 700,
+    height: 500,
+    fontColor: "#FFFFFF",
+    background: "#F59202",
+    isCardForm: false,
+    formId: "261545235953057",
+    buttonText: "Feedback",
+    buttonSide: "left",
+    buttonAlign: "center",
+    base: "https://form.jotform.com/",
+  }).componentID;
+</script>
+<script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+<script>window.jotformEmbedHandler("iframe[id='" + componentID + "_iframe']", "https://form.jotform.com/")</script>
+
 </body>
 </html>
