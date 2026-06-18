@@ -27,7 +27,7 @@ body::before {
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
   pointer-events: none;
-  z-index: 999;
+  z-index: 1;
 }
 
 /* ── NAV ── */
@@ -2694,7 +2694,7 @@ footer .footer-logo span {
   border-radius: 50%;
   background: radial-gradient(circle, rgba(79,195,247,0.04) 0%, transparent 70%);
   pointer-events: none;
-  z-index: 998;
+  z-index: 0;
   transform: translate(-50%, -50%);
   transition: left 0.15s ease, top 0.15s ease;
 }
@@ -2743,6 +2743,8 @@ footer .footer-logo span {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #0a0c10;
+  isolation: isolate;
 }
 
 /* animated background world */
@@ -3382,4 +3384,21 @@ footer .footer-logo span {
 @media (max-width: 600px) {
   .bench-name { width: 80px; font-size: 0.55rem; }
   .bench-wrap, .heatmap-wrap { padding: 0 1rem 3rem; }
+}
+
+/* ── SECTION BACKGROUND FIX ── */
+/* Ensure all content sections have a solid background so fixed overlays
+   (noise, cursor glow) never bleed through and make sections look black */
+#intro, #basics, #components, #build, #applications,
+#interactive, #workflow, #science, #thermal,
+#benchmarks, #heatmap, #conclusion, #qna, #team,
+.cardboard-stripe, footer {
+  position: relative;
+  background: var(--bg);
+  z-index: 2;
+}
+
+.journey-outer {
+  position: relative;
+  z-index: 2;
 }
