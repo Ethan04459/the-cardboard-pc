@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Cardboard PC</title>
+<title>The Cardboard PC – Components of a Computer</title>
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -25,15 +25,17 @@
     <div class="nav-drawer-inner">
       <a href="#intro"        class="drawer-link" data-num="01">Introduction</a>
       <a href="#basics"       class="drawer-link" data-num="02">PC Basics</a>
-      <a href="#components"   class="drawer-link" data-num="03">Components</a>
-      <a href="#build"        class="drawer-link" data-num="04">Build Process</a>
-      <a href="#applications" class="drawer-link" data-num="05">Applications</a>
+      <a href="#build"        class="drawer-link" data-num="03">Build Process</a>
+      <a href="#applications" class="drawer-link" data-num="04">Applications</a>
+      <a href="#interactive"  class="drawer-link" data-num="05">Components</a>
       <a href="#workflow"     class="drawer-link" data-num="06">How It Works</a>
       <a href="#science"      class="drawer-link" data-num="07">The Science</a>
       <a href="#thermal"      class="drawer-link" data-num="08">Thermal</a>
-      <a href="#conclusion"   class="drawer-link" data-num="09">Conclusion</a>
-      <a href="#qna"          class="drawer-link" data-num="10">Q &amp; A</a>
-      <a href="#team"         class="drawer-link" data-num="11">Team</a>
+      <a href="#benchmarks"   class="drawer-link" data-num="09">Benchmarks</a>
+      <a href="#heatmap"      class="drawer-link" data-num="10">Heat Map</a>
+      <a href="#conclusion"   class="drawer-link" data-num="11">Conclusion</a>
+      <a href="#qna"          class="drawer-link" data-num="12">Q &amp; A</a>
+      <a href="#team"         class="drawer-link" data-num="13">Team</a>
     </div>
   </div>
   <div class="nav-backdrop" id="nav-backdrop"></div>
@@ -400,33 +402,6 @@
 
 </div>
 
-<!-- COMPONENTS -->
-<div id="components">
-  <div class="components-header reveal">
-    <div class="section-label">Inside the machine</div>
-    <h2 class="section-title">The <span class="hl">Components</span></h2>
-    <div class="sep"></div>
-    <p class="section-desc">Click any component to learn what it does.</p>
-  </div>
-  <div class="comp-grid" id="comp-grid"></div>
-</div>
-
-<!-- MODAL -->
-<div class="modal-overlay" id="modal-overlay">
-  <div class="modal" id="modal">
-    <div class="modal-top-bar"></div>
-    <button class="modal-close" id="modal-close">✕</button>
-    <div class="modal-header">
-      <div class="modal-icon" id="modal-icon"></div>
-      <div class="modal-titles">
-        <div class="modal-abbr" id="modal-abbr"></div>
-        <div class="modal-full" id="modal-full"></div>
-      </div>
-    </div>
-    <div class="modal-body" id="modal-body"></div>
-  </div>
-</div>
-
 <!-- REAL WORLD APPLICATIONS -->
 <div id="applications">
   <div class="components-header reveal">
@@ -693,6 +668,31 @@
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- INTERACTIVE 3D MODEL -->
+<div id="interactive">
+  <div class="components-header reveal">
+    <div class="section-label">Try it yourself</div>
+    <h2 class="section-title">3D Interactive <span class="hl">Model</span></h2>
+    <div class="sep"></div>
+    <p class="section-desc">Drag to rotate 360°. Scroll to zoom. Click any component to inspect it. Press the power button on the PC to boot it up.</p>
+  </div>
+
+  <div class="model-3d-wrap reveal-zoom">
+    <iframe
+      src="pc-3d.html"
+      id="pc-3d-frame"
+      title="The Cardboard PC — 3D Interactive Model"
+      allowfullscreen
+    ></iframe>
+    <div class="model-3d-hint">
+      <span>🖱 Drag to rotate</span>
+      <span>🔍 Scroll to zoom</span>
+      <span>👆 Click to inspect</span>
+      <span>⏻ Click power button to boot</span>
+    </div>
   </div>
 </div>
 
@@ -1305,6 +1305,204 @@
   </div>
 </div>
 
+<!-- PERFORMANCE BENCHMARKS -->
+<div id="benchmarks">
+  <div class="components-header reveal">
+    <div class="section-label">Real-world numbers</div>
+    <h2 class="section-title">Performance <span class="hl">Benchmarks</span></h2>
+    <div class="sep"></div>
+    <p class="section-desc">Click a category to see how different components compare. Hover a bar for details.</p>
+  </div>
+
+  <div class="bench-wrap reveal-zoom">
+    <!-- category tabs -->
+    <div class="bench-tabs" id="bench-tabs">
+      <button class="bench-tab active" data-cat="gaming">🎮 Gaming FPS</button>
+      <button class="bench-tab" data-cat="render">🎬 Rendering</button>
+      <button class="bench-tab" data-cat="ai">🤖 AI Tasks</button>
+      <button class="bench-tab" data-cat="boot">⚡ Boot Speed</button>
+    </div>
+
+    <div class="bench-chart" id="bench-chart"></div>
+
+    <div class="bench-legend">
+      <span class="bench-legend-item"><span style="background:#f5a623"></span> High-end</span>
+      <span class="bench-legend-item"><span style="background:#4fc3f7"></span> Mid-range</span>
+      <span class="bench-legend-item"><span style="background:#a78bfa"></span> Budget</span>
+    </div>
+  </div>
+</div>
+
+<!-- HEAT MAP -->
+<div id="heatmap">
+  <div class="components-header reveal">
+    <div class="section-label">Thermal analysis</div>
+    <h2 class="section-title">PC <span class="hl">Heat Map</span></h2>
+    <div class="sep"></div>
+    <p class="section-desc">See where heat builds up inside a PC. Toggle between idle and gaming load. Hover a component to see its temperature.</p>
+  </div>
+
+  <div class="heatmap-wrap reveal-zoom">
+    <div class="heatmap-controls">
+      <button class="hm-btn active" id="hm-idle">❄️ Idle</button>
+      <button class="hm-btn" id="hm-gaming">🔥 Gaming Load</button>
+      <button class="hm-btn" id="hm-render">⚙️ Rendering</button>
+    </div>
+
+    <div class="heatmap-scene" id="heatmap-scene">
+
+      <!-- Case outline -->
+      <svg viewBox="0 0 520 480" class="heatmap-svg" xmlns="http://www.w3.org/2000/svg" id="hm-svg">
+        <defs>
+          <radialGradient id="hg-cpu" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ef4444" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="hg-gpu" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#f97316" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="hg-psu" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#eab308" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#eab308" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="hg-vrm" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="hblur"><feGaussianBlur stdDeviation="18"/></filter>
+          <filter id="hblur2"><feGaussianBlur stdDeviation="10"/></filter>
+        </defs>
+
+        <!-- Case background -->
+        <rect x="20" y="10" width="480" height="460" rx="8" fill="#0d1117" stroke="#2a3550" stroke-width="2"/>
+        <!-- shelf divider -->
+        <rect x="20" y="370" width="480" height="2" fill="#2a3550"/>
+        <!-- side wall highlight -->
+        <rect x="488" y="10" width="12" height="460" rx="0 8 8 0" fill="#12161e"/>
+
+        <!-- HEAT BLOBS (behind everything) -->
+        <g id="hm-heat-layer">
+          <ellipse id="hm-cpu-heat" cx="130" cy="110" rx="70" ry="65" fill="url(#hg-cpu)" filter="url(#hblur)" opacity="0"/>
+          <ellipse id="hm-gpu-heat" cx="320" cy="160" rx="55" ry="100" fill="url(#hg-gpu)" filter="url(#hblur)" opacity="0"/>
+          <ellipse id="hm-psu-heat" cx="390" cy="420" rx="60" ry="35" fill="url(#hg-psu)" filter="url(#hblur2)" opacity="0"/>
+          <ellipse id="hm-vrm-heat" cx="100" cy="200" rx="40" ry="35" fill="url(#hg-vrm)" filter="url(#hblur2)" opacity="0"/>
+          <ellipse id="hm-ram-heat" cx="200" cy="195" rx="80" ry="20" fill="url(#hg-vrm)" filter="url(#hblur2)" opacity="0"/>
+        </g>
+
+        <!-- AIRFLOW ARROWS -->
+        <g id="hm-airflow" opacity="0">
+          <!-- intake arrows (blue, coming in from left/top) -->
+          <g class="hm-arrow intake">
+            <path d="M20 80 L60 80" stroke="#4fc3f7" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arr-in)"/>
+            <path d="M20 160 L60 160" stroke="#4fc3f7" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arr-in)"/>
+          </g>
+          <!-- exhaust arrows (red, going out top/right) -->
+          <g class="hm-arrow exhaust">
+            <path d="M420 10 L420 50" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arr-out)" transform="rotate(90,420,30)"/>
+            <path d="M460 10 L460 50" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arr-out)" transform="rotate(90,460,30)"/>
+          </g>
+          <defs>
+            <marker id="arr-in" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#4fc3f7"/>
+            </marker>
+            <marker id="arr-out" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#ef4444"/>
+            </marker>
+          </defs>
+        </g>
+
+        <!-- MOTHERBOARD -->
+        <rect x="45" y="30" width="340" height="310" rx="4" fill="#0a1628" stroke="#1e3a5f" stroke-width="1.5"/>
+
+        <!-- CPU -->
+        <g class="hm-comp" id="hmc-cpu" data-id="cpu">
+          <rect x="80" y="65" width="90" height="90" rx="4" fill="#1a2535" stroke="#f5a623" stroke-width="1.5"/>
+          <rect x="92" y="77" width="66" height="66" rx="2" fill="#0d1825" stroke="#f5a62360" stroke-width="1"/>
+          <text x="125" y="115" text-anchor="middle" fill="#f5a623" font-size="11" font-weight="700" font-family="Orbitron,monospace">CPU</text>
+          <text x="125" y="130" text-anchor="middle" fill="#7a8299" font-size="7" font-family="Exo 2,sans-serif" id="hm-cpu-temp">20°C</text>
+        </g>
+
+        <!-- VRM -->
+        <g class="hm-comp" id="hmc-vrm" data-id="vrm">
+          <rect x="80" y="175" width="55" height="40" rx="3" fill="#141c2a" stroke="#f9731660" stroke-width="1"/>
+          <text x="107" y="200" text-anchor="middle" fill="#f97316" font-size="8" font-weight="700" font-family="Orbitron,monospace">VRM</text>
+          <text x="107" y="212" text-anchor="middle" fill="#7a8299" font-size="7" font-family="Exo 2,sans-serif" id="hm-vrm-temp">18°C</text>
+        </g>
+
+        <!-- RAM -->
+        <g class="hm-comp" id="hmc-ram" data-id="ram">
+          <rect x="150" y="178" width="120" height="15" rx="2" fill="#1a0030" stroke="#a78bfa60" stroke-width="1"/>
+          <rect x="150" y="198" width="120" height="15" rx="2" fill="#1a0030" stroke="#a78bfa60" stroke-width="1"/>
+          <text x="210" y="228" text-anchor="middle" fill="#a78bfa" font-size="8" font-weight="700" font-family="Orbitron,monospace">RAM</text>
+          <text x="210" y="238" text-anchor="middle" fill="#7a8299" font-size="7" font-family="Exo 2,sans-serif" id="hm-ram-temp">32°C</text>
+        </g>
+
+        <!-- GPU -->
+        <g class="hm-comp" id="hmc-gpu" data-id="gpu">
+          <rect x="290" y="65" width="58" height="190" rx="4" fill="#0d1a2a" stroke="#4fc3f7" stroke-width="1.5"/>
+          <text x="319" y="165" text-anchor="middle" fill="#4fc3f7" font-size="10" font-weight="700" font-family="Orbitron,monospace">GPU</text>
+          <text x="319" y="180" text-anchor="middle" fill="#7a8299" font-size="7" font-family="Exo 2,sans-serif" id="hm-gpu-temp">22°C</text>
+        </g>
+
+        <!-- Case Fans -->
+        <g class="hm-comp" id="hmc-fan1" data-id="fan1">
+          <circle cx="430" cy="100" r="42" fill="none" stroke="#94a3b860" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <circle cx="430" cy="100" r="5" fill="#2a3550"/>
+          <text x="430" y="155" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="Orbitron,monospace">FAN 1</text>
+        </g>
+        <g class="hm-comp" id="hmc-fan2" data-id="fan2">
+          <circle cx="170" cy="295" r="35" fill="none" stroke="#94a3b860" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <circle cx="170" cy="295" r="5" fill="#2a3550"/>
+          <text x="170" y="342" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="Orbitron,monospace">FAN 2</text>
+        </g>
+        <g class="hm-comp" id="hmc-fan3" data-id="fan3">
+          <circle cx="430" cy="310" r="30" fill="none" stroke="#94a3b860" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <circle cx="430" cy="310" r="5" fill="#2a3550"/>
+          <text x="430" y="353" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="Orbitron,monospace">FAN 3</text>
+        </g>
+
+        <!-- SSD -->
+        <g class="hm-comp" id="hmc-ssd" data-id="ssd">
+          <rect x="60" y="395" width="140" height="50" rx="4" fill="#071a10" stroke="#48c78e60" stroke-width="1"/>
+          <text x="130" y="425" text-anchor="middle" fill="#48c78e" font-size="9" font-weight="700" font-family="Orbitron,monospace">SSD</text>
+          <text x="130" y="437" text-anchor="middle" fill="#7a8299" font-size="7" font-family="Exo 2,sans-serif" id="hm-ssd-temp">28°C</text>
+        </g>
+
+        <!-- PSU -->
+        <g class="hm-comp" id="hmc-psu" data-id="psu">
+          <rect x="310" y="385" width="150" height="65" rx="4" fill="#1a1200" stroke="#f5a62360" stroke-width="1"/>
+          <text x="385" y="422" text-anchor="middle" fill="#f5a623" font-size="10" font-weight="700" font-family="Orbitron,monospace">PSU</text>
+          <text x="385" y="437" text-anchor="middle" fill="#7a8299" font-size="7" font-family="Exo 2,sans-serif" id="hm-psu-temp">35°C</text>
+        </g>
+
+        <!-- temp scale bar -->
+        <defs>
+          <linearGradient id="tempScale" x1="0%" x2="100%">
+            <stop offset="0%"   stop-color="#4fc3f7"/>
+            <stop offset="40%"  stop-color="#48c78e"/>
+            <stop offset="70%"  stop-color="#f5a623"/>
+            <stop offset="100%" stop-color="#ef4444"/>
+          </linearGradient>
+        </defs>
+        <rect x="45" y="460" width="200" height="8" rx="4" fill="url(#tempScale)"/>
+        <text x="45"  y="456" fill="#4fc3f7" font-size="7" font-family="Exo 2,sans-serif">Cool</text>
+        <text x="235" y="456" fill="#ef4444" font-size="7" font-family="Exo 2,sans-serif">Hot</text>
+      </svg>
+
+      <!-- hover tooltip -->
+      <div class="hm-tooltip" id="hm-tooltip">
+        <div class="hm-tt-name" id="hm-tt-name"></div>
+        <div class="hm-tt-temp" id="hm-tt-temp"></div>
+        <div class="hm-tt-desc" id="hm-tt-desc"></div>
+      </div>
+    </div>
+
+    <!-- temp legend -->
+    <div class="hm-temp-strip" id="hm-temp-strip"></div>
+  </div>
+</div>
+
 <!-- CONCLUSION -->
 <section id="conclusion">
 
@@ -1427,86 +1625,6 @@
 </footer>
 
 <script>
-/* ── COMPONENT DATA ── */
-const components = [
-  { abbr:"8-PIN PWR", full:"8-pin Power Connector", icon:"⚡", color:"orange",
-    desc:"A dedicated plug that delivers extra +12V power to high-performance components — most commonly graphics cards — when the motherboard slot alone isn't enough. Supplies up to 150W of stable power for demanding hardware.", bullets:[] },
-  { abbr:"VRM", full:"Voltage Regulator Module", icon:"🔧", color:"",
-    desc:"A component on the motherboard that regulates voltage from the power supply and delivers the correct voltage to the CPU/GPU.",
-    bullets:["Converts high input voltage (e.g. 12V PSU) to lower voltage needed by CPU/GPU (e.g. 1.1–1.3V)","Ensures stable and consistent power to prevent crashes or damage","Helps with overclocking by providing clean power"] },
-  { abbr:"PCIe", full:"Peripheral Component Interconnect Express", icon:"🔌", color:"",
-    desc:"A high-speed expansion slot on the motherboard used to connect powerful components like the GPU.",
-    bullets:["Connects devices like the GPU to the motherboard","Transfers data between GPU and CPU at very high speeds","Uses 'Lanes' (x1, x4, x8, x16) to increase data speed — most GPUs use PCIe x16","Allows gaming, video editing, and 3D applications to run efficiently"] },
-  { abbr:"M.2 SSD", full:"M.2 Solid State Drive (Stick-Style)", icon:"💾", color:"green",
-    desc:"A small, stick-style SSD that plugs directly into a special slot on the motherboard. Because it plugs straight in, it can be faster and more efficient than the box-style SSD.", bullets:[] },
-  { abbr:"CPU", full:"Central Processing Unit", icon:"🖥️", color:"orange",
-    desc:"The brain of the computer. It processes instructions, performs calculations, and manages data for all programs.", bullets:[] },
-  { abbr:"RAM", full:"Random Access Memory", icon:"🧠", color:"purple",
-    desc:"Temporary memory used by the CPU while the computer is running. It stores data that programs need quickly — helping the computer run multiple programs at once.", bullets:[] },
-  { abbr:"GPU", full:"Graphics Processing Unit", icon:"🎮", color:"orange",
-    desc:"A processor that handles images, video, and graphics. It renders visuals for your monitor and takes the heavy graphics work off the CPU.", bullets:[] },
-  { abbr:"MOTHERBOARD", full:"Motherboard", icon:"🗂️", color:"",
-    desc:"The main circuit board connecting all computer components. Holds the CPU, RAM, GPU, storage, and connectors — and allows all components to communicate with each other.", bullets:[] },
-  { abbr:"24-PIN", full:"24-pin Connector", icon:"🔗", color:"",
-    desc:"The main power line from the PSU to the motherboard. Supplies electricity to the motherboard and all the components attached to it.", bullets:[] },
-  { abbr:"SSD", full:"Solid State Drive", icon:"📀", color:"green",
-    desc:"A type of storage that holds data and programs. Stores your operating system, files, and software — faster and more compact than a traditional hard drive.", bullets:[] },
-  { abbr:'2.5" SSD', full:"2.5-inch SSD (Box Style)", icon:"📦", color:"green",
-    desc:"The larger rectangular SSD that looks like a small box. It stores data and connects to the motherboard using data cables and power cables (in the model, represented with string).", bullets:[] },
-  { abbr:"PSU", full:"Power Supply Unit", icon:"🔋", color:"orange",
-    desc:"Converts electricity from a wall outlet into usable power for the computer. Supplies power to the motherboard, GPU, and storage devices.", bullets:[] },
-  { abbr:"CASE FANS", full:"Case Fans", icon:"💨", color:"",
-    desc:"Fans move air through the computer to keep it cool. They prevent overheating and maintain stable operation of all components.", bullets:[] }
-];
-
-/* ── BUILD COMPONENT CARDS ── */
-const grid = document.getElementById('comp-grid');
-components.forEach(c => {
-  const card = document.createElement('div');
-  card.className = `comp-card reveal ${c.color}`;
-  card.innerHTML = `
-    <div class="comp-card-icon">${c.icon}</div>
-    <div class="comp-card-abbr">${c.abbr}</div>
-    <div class="comp-card-full">${c.full}</div>
-    <div class="comp-card-hint">tap to learn more</div>
-  `;
-  card.addEventListener('click', () => openModal(c));
-  grid.appendChild(card);
-});
-
-/* ── MODAL ── */
-const overlay   = document.getElementById('modal-overlay');
-const modal     = document.getElementById('modal');
-const modalIcon = document.getElementById('modal-icon');
-const modalAbbr = document.getElementById('modal-abbr');
-const modalFull = document.getElementById('modal-full');
-const modalBody = document.getElementById('modal-body');
-const modalClose= document.getElementById('modal-close');
-
-function openModal(c) {
-  modalIcon.textContent = c.icon;
-  modalAbbr.textContent = c.abbr;
-  modalFull.textContent = c.full;
-
-  const bulletsHTML = c.bullets.length
-    ? `<ul>${c.bullets.map(b => `<li>${b}</li>`).join('')}</ul>`
-    : '';
-  modalBody.innerHTML = `<p>${c.desc}</p>${bulletsHTML}`;
-
-  modal.className = `modal ${c.color}`;
-  overlay.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  overlay.classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-modalClose.addEventListener('click', closeModal);
-overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
 /* ── SCROLL JOURNEY ── */
 (function(){
   const outer   = document.getElementById('journey');
@@ -1695,6 +1813,744 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
   });
 })();
 
+
+/* ── INTERACTIVE PC DIAGRAM + COMPONENT DATA + MODAL ── */
+(function(){
+  const frame      = document.getElementById('pc-frame');
+  const btnPower   = document.getElementById('btn-power');
+  const btnGame    = document.getElementById('btn-game');
+  const btnReset   = document.getElementById('btn-reset');
+  const btnReplay  = document.getElementById('btn-replay');
+  const statusDot  = document.getElementById('pc-status-dot');
+  const statusText = document.getElementById('pc-status-text');
+  const infoText   = document.getElementById('pc-info-text');
+  const cpuTemp    = document.getElementById('cpu-temp');
+  const gpuTemp    = document.getElementById('gpu-temp');
+  const fpsVal     = document.getElementById('fps-val');
+  const pulse      = document.getElementById('boot-pulse');
+  const caption    = document.getElementById('boot-caption');
+  const captionStep= document.getElementById('boot-caption-step');
+  const captionText= document.getElementById('boot-caption-text');
+
+  let state = 'off'; // off | idle | gaming
+  let fpsInterval = null;
+  let tempInterval = null;
+  let cpuC = 0, gpuC = 0, fps = 0;
+  let booting = false;
+
+  /* ════════ COMPONENT DATA ════════ */
+  const componentData = {
+    'pc-cpu': {
+      abbr: "CPU", full: "Central Processing Unit", icon: "🖥️", color: "orange",
+      desc: "The brain of the computer. It processes instructions, performs calculations, and manages data for all programs — from booting the OS to running every app.",
+      bullets: [],
+      stats: () => state === 'off' ? [
+        ['Status','Offline'], ['Temperature','--'], ['Usage','0%'], ['Clock Speed','--']
+      ] : state === 'idle' ? [
+        ['Status','Running OS'], ['Temperature', Math.round(cpuC)+'°C'], ['Usage','3 – 8%'], ['Clock Speed','3.6 GHz']
+      ] : [
+        ['Status','Under Load'], ['Temperature', Math.round(cpuC)+'°C'], ['Usage','55 – 80%'], ['Clock Speed','4.8 GHz (boost)']
+      ]
+    },
+    'pc-ram': {
+      abbr: "RAM", full: "Random Access Memory", icon: "🧠", color: "purple",
+      desc: "Temporary, high-speed memory used by the CPU while the computer is running. It holds everything currently in use — but loses its contents instantly when power is cut.",
+      bullets: [],
+      stats: () => state === 'off' ? [
+        ['Status','Offline'], ['Used', '0 GB / 16 GB'], ['Speed','--'], ['Volatile?','Yes']
+      ] : state === 'idle' ? [
+        ['Status','Active'], ['Used','3.2 GB / 16 GB'], ['Speed','4800 MHz'], ['Volatile?','Yes']
+      ] : [
+        ['Status','Active — High Load'], ['Used','11.4 GB / 16 GB'], ['Speed','4800 MHz'], ['Volatile?','Yes']
+      ]
+    },
+    'pc-gpu': {
+      abbr: "GPU", full: "Graphics Processing Unit", icon: "🎮", color: "orange",
+      desc: "A processor with thousands of small cores, built to render images, video, and 3D graphics in parallel. It takes the heavy visual workload off the CPU.",
+      bullets: [],
+      stats: () => state === 'off' ? [
+        ['Status','Offline'], ['Temperature','--'], ['Usage','0%'], ['Fan Speed','0 RPM']
+      ] : state === 'idle' ? [
+        ['Status','Idle'], ['Temperature', Math.round(gpuC)+'°C'], ['Usage','1 – 4%'], ['Fan Speed','800 RPM']
+      ] : [
+        ['Status','Rendering'], ['Temperature', Math.round(gpuC)+'°C'], ['Usage','92 – 99%'], ['Fan Speed','2400 RPM']
+      ]
+    },
+    'pc-ssd': {
+      abbr: "SSD", full: "Solid State Drive", icon: "📀", color: "green",
+      desc: "Permanent storage using NAND flash memory. Holds the operating system, files, and games — and keeps its data even with no power, unlike RAM.",
+      bullets: [],
+      stats: () => state === 'off' ? [
+        ['Status','Offline'], ['Activity','--'], ['Read Speed','--'], ['Capacity','512 GB']
+      ] : state === 'idle' ? [
+        ['Status','Mounted'], ['Activity','Low'], ['Read Speed','~120 MB/s'], ['Capacity','512 GB']
+      ] : [
+        ['Status','Streaming Assets'], ['Activity','High'], ['Read Speed','~3,200 MB/s'], ['Capacity','512 GB']
+      ]
+    },
+    'pc-mobo': {
+      abbr: "MOBO", full: "Motherboard", icon: "🗂️", color: "",
+      desc: "The main circuit board connecting every component. Holds the CPU, RAM, GPU, storage, and connectors — and routes power and data between all of them.",
+      bullets: [],
+      stats: () => state === 'off' ? [
+        ['Status','Unpowered'], ['Chipset Temp','--'], ['POST','Not run']
+      ] : [
+        ['Status','Powered'], ['Chipset Temp', Math.round(30 + cpuC*0.2)+'°C'], ['POST','Passed ✓']
+      ]
+    },
+    'pc-vrm': {
+      abbr: "VRM", full: "Voltage Regulator Module", icon: "🔧", color: "",
+      desc: "Steps down the 12V from the PSU to the precise low voltage (around 1.1–1.3V) that the CPU needs, keeping power clean and stable.",
+      bullets: [
+        "Converts 12V input down to ~1.1–1.3V for the CPU",
+        "Keeps voltage stable to prevent crashes or damage",
+        "Important for safe overclocking"
+      ],
+      stats: () => state === 'off' ? [
+        ['Status','Off'], ['Output Voltage','0V'], ['Load','0%']
+      ] : state === 'idle' ? [
+        ['Status','Regulating'], ['Output Voltage','1.15V'], ['Load','12%']
+      ] : [
+        ['Status','Regulating'], ['Output Voltage','1.28V'], ['Load','78%']
+      ]
+    },
+    'pc-24pin': {
+      abbr: "24-PIN", full: "24-pin Connector", icon: "🔗", color: "",
+      desc: "The main power cable from the PSU to the motherboard. It supplies electricity to the motherboard and every component connected to it.",
+      bullets: [],
+      stats: () => state === 'off' ? [
+        ['Status','No Power'], ['Voltage Rails','--']
+      ] : [
+        ['Status','Carrying Power'], ['Voltage Rails','+12V / +5V / +3.3V']
+      ]
+    },
+    'pc-psu': {
+      abbr: "PSU", full: "Power Supply Unit", icon: "🔋", color: "orange",
+      desc: "Converts mains AC electricity from the wall into the steady DC voltages the PC needs. Also houses the power button that starts the boot process.",
+      bullets: [],
+      stats: () => state === 'off' ? [
+        ['Status','Off'], ['Power Draw','0 W'], ['Output','0V']
+      ] : state === 'idle' ? [
+        ['Status','On'], ['Power Draw','~85 W'], ['Output','12V / 5V / 3.3V']
+      ] : [
+        ['Status','On — High Draw'], ['Power Draw','~310 W'], ['Output','12V / 5V / 3.3V']
+      ]
+    },
+    'pc-pcie': {
+      abbr: "PCIe", full: "Peripheral Component Interconnect Express", icon: "🔌", color: "",
+      desc: "A high-speed expansion lane connecting the GPU to the motherboard, letting it exchange huge amounts of data with the CPU every second.",
+      bullets: [
+        "Connects the GPU to the motherboard",
+        "Transfers data between GPU and CPU at very high speed",
+        "Most modern GPUs use a PCIe x16 slot"
+      ],
+      stats: () => state === 'off' ? [
+        ['Status','Inactive'], ['Lane Width','x16'], ['Bandwidth','0 GB/s']
+      ] : state === 'idle' ? [
+        ['Status','Active'], ['Lane Width','x16'], ['Bandwidth','~1 GB/s']
+      ] : [
+        ['Status','Active — Saturated'], ['Lane Width','x16'], ['Bandwidth','~16 GB/s']
+      ]
+    },
+    'pc-fan-1': {
+      abbr: "FAN", full: "Case Fan — Rear Exhaust", icon: "💨", color: "",
+      desc: "Pulls warm air out from inside the case, working with the intake fans to keep a steady flow of cool air across every component.",
+      bullets: [],
+      stats: () => fanStats()
+    },
+    'pc-fan-2': {
+      abbr: "FAN", full: "Case Fan — Front Intake", icon: "💨", color: "",
+      desc: "Pulls cool air into the case from outside, aimed across the RAM and motherboard to keep temperatures down.",
+      bullets: [],
+      stats: () => fanStats()
+    },
+    'pc-fan-3': {
+      abbr: "FAN", full: "Case Fan — Top Exhaust", icon: "💨", color: "",
+      desc: "Vents hot air out from the top of the case — heat naturally rises, so this fan helps clear it away from the GPU and CPU.",
+      bullets: [],
+      stats: () => fanStats()
+    }
+  };
+
+  function fanStats() {
+    return state === 'off' ? [
+      ['Status','Stopped'], ['Speed','0 RPM'], ['Airflow','0 CFM']
+    ] : state === 'idle' ? [
+      ['Status','Spinning — Low'], ['Speed','~800 RPM'], ['Airflow','~12 CFM']
+    ] : [
+      ['Status','Spinning — High'], ['Speed','~2400 RPM'], ['Airflow','~45 CFM']
+    ];
+  }
+
+  /* ════════ MODAL ════════ */
+  const overlay    = document.getElementById('modal-overlay');
+  const modal      = document.getElementById('modal');
+  const modalIcon  = document.getElementById('modal-icon');
+  const modalAbbr  = document.getElementById('modal-abbr');
+  const modalFull  = document.getElementById('modal-full');
+  const modalClose = document.getElementById('modal-close');
+  const tabStats   = document.getElementById('tab-stats');
+  const tabDesc    = document.getElementById('tab-desc');
+  const paneStats  = document.getElementById('pane-stats');
+  const paneDesc   = document.getElementById('pane-desc');
+
+  let activeComponentId = null;
+
+  function renderStats(id) {
+    const c = componentData[id];
+    const stats = c.stats();
+    paneStats.innerHTML = `<div class="stat-grid">${stats.map(([label,val]) =>
+      `<div class="stat-row"><span class="stat-row-label">${label}</span><span class="stat-row-val">${val}</span></div>`
+    ).join('')}</div>`;
+  }
+
+  function renderDesc(id) {
+    const c = componentData[id];
+    const bulletsHTML = c.bullets.length
+      ? `<ul>${c.bullets.map(b => `<li>${b}</li>`).join('')}</ul>`
+      : '';
+    paneDesc.innerHTML = `<p>${c.desc}</p>${bulletsHTML}`;
+  }
+
+  function openComponentModal(id) {
+    const c = componentData[id];
+    if (!c) return;
+    activeComponentId = id;
+
+    modalIcon.textContent = c.icon;
+    modalAbbr.textContent = c.abbr;
+    modalFull.textContent = c.full;
+    modal.className = `modal ${c.color}`;
+
+    renderStats(id);
+    renderDesc(id);
+
+    tabStats.classList.add('active');
+    tabDesc.classList.remove('active');
+    paneStats.classList.add('active');
+    paneDesc.classList.remove('active');
+
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    activeComponentId = null;
+  }
+
+  tabStats.addEventListener('click', () => {
+    tabStats.classList.add('active'); tabDesc.classList.remove('active');
+    paneStats.classList.add('active'); paneDesc.classList.remove('active');
+    if (activeComponentId) renderStats(activeComponentId);
+  });
+  tabDesc.addEventListener('click', () => {
+    tabDesc.classList.add('active'); tabStats.classList.remove('active');
+    paneDesc.classList.add('active'); paneStats.classList.remove('active');
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal(); });
+
+  /* click handlers on every diagram component */
+  Object.keys(componentData).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', () => {
+      if (booting) return; // don't open modal mid boot-animation
+      openComponentModal(id);
+    });
+  });
+
+  /* ════════ STATE MANAGEMENT ════════ */
+  function setState(s) {
+    state = s;
+    frame.classList.remove('state-off','state-idle','state-gaming');
+    frame.classList.add('state-' + s);
+
+    if (s === 'off') {
+      statusDot.className = 'pc-status-dot';
+      statusText.textContent = 'System Powered Off';
+      btnPower.innerHTML = '<span class="pc-ctrl-icon">⏻</span> Power On';
+      btnPower.classList.add('primary');
+      btnGame.disabled = true;
+      btnReset.disabled = true;
+      cpuTemp.textContent = 'OFF';
+      gpuTemp.textContent = 'OFF';
+      fpsVal.textContent = '--';
+      infoText.innerHTML = 'The system is off. Press <strong>Power On</strong> to start the boot sequence — watch data flow from the power button through every component, in slow motion.';
+      clearInterval(fpsInterval); clearInterval(tempInterval);
+      cpuC = 0; gpuC = 0; fps = 0;
+    }
+
+    if (s === 'idle') {
+      statusDot.className = 'pc-status-dot on';
+      statusText.textContent = 'System Idle — Running OS';
+      btnPower.innerHTML = '<span class="pc-ctrl-icon">⏻</span> Power Off';
+      btnPower.classList.remove('primary');
+      btnGame.disabled = false;
+      btnReset.disabled = true;
+      fpsVal.textContent = '--';
+      infoText.innerHTML = 'The fans are spinning, RAM is active, and the CPU/GPU are idling at low temperature. Press <strong>Launch High-FPS Game</strong> to put the system under load — or click any part of the diagram to see its live stats.';
+      if (cpuC < 28) cpuC = 32;
+      if (gpuC < 28) gpuC = 35;
+      cpuTemp.textContent = Math.round(cpuC) + '°C';
+      gpuTemp.textContent = Math.round(gpuC) + '°C';
+
+      clearInterval(tempInterval);
+      tempInterval = setInterval(() => {
+        cpuC += (Math.random() - 0.5) * 1.2;
+        gpuC += (Math.random() - 0.5) * 1.2;
+        cpuC = Math.max(28, Math.min(38, cpuC));
+        gpuC = Math.max(30, Math.min(40, gpuC));
+        cpuTemp.textContent = Math.round(cpuC) + '°C';
+        gpuTemp.textContent = Math.round(gpuC) + '°C';
+      }, 900);
+    }
+
+    if (s === 'gaming') {
+      statusDot.className = 'pc-status-dot hot';
+      statusText.textContent = 'Gaming — Components Under Load';
+      btnGame.disabled = true;
+      btnReset.disabled = false;
+      infoText.innerHTML = 'The GPU is rendering thousands of frames per second. Both the CPU and GPU heat up, fans spin faster to compensate, and FPS climbs as the game runs. Click any part to see its live stats.';
+
+      clearInterval(tempInterval);
+      tempInterval = setInterval(() => {
+        cpuC = Math.min(78, cpuC + Math.random() * 3);
+        gpuC = Math.min(85, gpuC + Math.random() * 3.5);
+        cpuTemp.textContent = Math.round(cpuC) + '°C';
+        gpuTemp.textContent = Math.round(gpuC) + '°C';
+      }, 400);
+
+      clearInterval(fpsInterval);
+      fps = 0;
+      fpsInterval = setInterval(() => {
+        fps = Math.min(165, fps + Math.random() * 25);
+        fpsVal.textContent = Math.round(fps);
+      }, 300);
+    }
+  }
+
+  /* ════════ BOOT SEQUENCE ANIMATION ════════ */
+  /* coordinates correspond to component centres in the 600x540 viewBox */
+  const bootSteps = [
+    { ids:['pc-psu'],                       point:[500,450], caption:"Power button pressed — the PSU converts mains AC into +12V, +5V and +3.3V DC." },
+    { ids:['pc-24pin','pc-vrm'],             point:[359,73],  caption:"Power flows through the 24-pin connector. The VRM steps voltage down for the CPU." },
+    { ids:['pc-cpu'],                       point:[125,100], caption:"The CPU wakes up and begins executing the BIOS / UEFI firmware." },
+    { ids:['pc-ram','pc-ssd','pc-mobo'],     point:[170,192], caption:"POST runs — checking that RAM, storage and the GPU are detected and working." },
+    { ids:['pc-ssd','pc-ram'],               point:[165,440], caption:"The bootloader is read from the SSD and copied into RAM, ready to launch the OS." },
+    { ids:['pc-gpu','pc-fan-1','pc-fan-2','pc-fan-3'], point:[311,150], caption:"The OS finishes loading — the GPU renders the desktop, and fans spin up to manage heat." },
+  ];
+
+  function clearBootHighlights() {
+    document.querySelectorAll('.boot-active').forEach(el => el.classList.remove('boot-active'));
+  }
+
+  function animatePulse(fromX, fromY, toX, toY, duration) {
+    return new Promise(resolve => {
+      const start = performance.now();
+      function frameFn(now) {
+        const t = Math.min(1, (now - start) / duration);
+        const ease = t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2; /* easeInOutQuad */
+        const x = fromX + (toX - fromX) * ease;
+        const y = fromY + (toY - fromY) * ease;
+        pulse.setAttribute('cx', x);
+        pulse.setAttribute('cy', y);
+        if (t < 1) requestAnimationFrame(frameFn);
+        else resolve();
+      }
+      requestAnimationFrame(frameFn);
+    });
+  }
+
+  function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async function playBootSequence() {
+    booting = true;
+    btnPower.disabled = true;
+    btnGame.disabled = true;
+    btnReset.disabled = true;
+    btnReplay.disabled = true;
+
+    frame.classList.add('booting');
+    pulse.setAttribute('cx', 500);
+    pulse.setAttribute('cy', 450);
+    pulse.classList.add('visible');
+    caption.classList.add('visible');
+
+    let curX = 500, curY = 450;
+
+    for (let i = 0; i < bootSteps.length; i++) {
+      const step = bootSteps[i];
+      clearBootHighlights();
+
+      captionStep.textContent = `Step ${i+1} / ${bootSteps.length}`;
+      captionText.textContent = step.caption;
+
+      // move pulse to this step's point (slow-mo)
+      await animatePulse(curX, curY, step.point[0], step.point[1], 1100);
+      curX = step.point[0]; curY = step.point[1];
+
+      // highlight relevant components
+      step.ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('boot-active');
+      });
+
+      // pulse ping effect
+      pulse.classList.add('ping');
+      await wait(900);
+      pulse.classList.remove('ping');
+    }
+
+    await wait(400);
+    clearBootHighlights();
+    pulse.classList.remove('visible');
+    caption.classList.remove('visible');
+    frame.classList.remove('booting');
+
+    booting = false;
+    btnPower.disabled = false;
+    btnGame.disabled = false;
+    btnReset.disabled = false;
+    btnReplay.disabled = false;
+
+    setState('idle');
+  }
+
+  /* ════════ BUTTON HANDLERS ════════ */
+  btnPower.addEventListener('click', async () => {
+    if (booting) return;
+    if (state === 'off') {
+      await playBootSequence();
+    } else {
+      setState('off');
+    }
+  });
+
+  btnGame.addEventListener('click', () => {
+    if (state === 'idle' && !booting) setState('gaming');
+  });
+
+  btnReset.addEventListener('click', () => {
+    if (state === 'gaming' && !booting) {
+      cpuC = 32; gpuC = 35;
+      setState('idle');
+    }
+  });
+
+  btnReplay.addEventListener('click', async () => {
+    if (booting) return;
+    setState('off');
+    await wait(400);
+    await playBootSequence();
+  });
+
+  setState('off');
+})();
+
+/* ── PERFORMANCE BENCHMARKS ── */
+(function(){
+  const DATA = {
+    gaming: {
+      label: "Gaming FPS (1080p Ultra)",
+      unit: "FPS",
+      items: [
+        { name:"RTX 4090",   val:210, tier:"high",   note:"Flagship GPU — overkill for most" },
+        { name:"RTX 4070",   val:155, tier:"high",   note:"High-end GPU — excellent 1080p/1440p" },
+        { name:"RTX 3060",   val:110, tier:"mid",    note:"Great mid-range, widely popular" },
+        { name:"RX 6700 XT", val:105, tier:"mid",    note:"AMD alternative, great value" },
+        { name:"GTX 1660",   val:72,  tier:"mid",    note:"Older mid-range, still capable" },
+        { name:"RX 6600",    val:90,  tier:"mid",    note:"Budget-friendly 1080p card" },
+        { name:"GTX 1050 Ti",val:38,  tier:"budget", note:"Entry-level, struggles at Ultra" },
+        { name:"Integrated", val:12,  tier:"budget", note:"Intel UHD — basic tasks only" },
+      ]
+    },
+    render: {
+      label: "3D Render Time (lower = faster, seconds)",
+      unit: "sec",
+      invert: true,
+      items: [
+        { name:"Ryzen 9 7950X", val:18,  tier:"high",   note:"16-core beast — professional workstation" },
+        { name:"Core i9-13900K",val:22,  tier:"high",   note:"Intel flagship — top single-core too" },
+        { name:"Ryzen 7 7700X", val:32,  tier:"mid",    note:"8-core sweet spot for creators" },
+        { name:"Core i5-13600K",val:38,  tier:"mid",    note:"Best value CPU for most builds" },
+        { name:"Ryzen 5 5600X", val:52,  tier:"mid",    note:"Still great for gaming + light work" },
+        { name:"Core i3-12100", val:85,  tier:"budget", note:"4-core budget chip — limited" },
+        { name:"Ryzen 3 3300X", val:110, tier:"budget", note:"Budget quad-core — entry level" },
+      ]
+    },
+    ai: {
+      label: "AI Inference Speed (tokens/sec)",
+      unit: "tok/s",
+      items: [
+        { name:"RTX 4090 24GB", val:180, tier:"high",   note:"Fastest consumer GPU for AI" },
+        { name:"RTX 4080 16GB", val:130, tier:"high",   note:"Excellent VRAM for large models" },
+        { name:"RTX 3090 24GB", val:110, tier:"high",   note:"Still competitive — lots of VRAM" },
+        { name:"RTX 4070 12GB", val:90,  tier:"mid",    note:"Good balance of speed and memory" },
+        { name:"RTX 3060 12GB", val:55,  tier:"mid",    note:"Popular AI hobbyist card" },
+        { name:"RTX 3050 8GB",  val:30,  tier:"budget", note:"Limited VRAM constrains large models" },
+        { name:"CPU only",      val:8,   tier:"budget", note:"No GPU — very slow for AI" },
+      ]
+    },
+    boot: {
+      label: "Boot Time to Desktop (seconds, lower = faster)",
+      unit: "sec",
+      invert: true,
+      items: [
+        { name:"NVMe PCIe 5.0", val:4,  tier:"high",   note:"Latest gen SSD — blindingly fast" },
+        { name:"NVMe PCIe 4.0", val:6,  tier:"high",   note:"Current high-end standard" },
+        { name:"NVMe PCIe 3.0", val:9,  tier:"mid",    note:"Still very fast — common choice" },
+        { name:"SATA SSD",      val:14, tier:"mid",    note:"Like the one in our cardboard model" },
+        { name:"HDD 7200RPM",   val:38, tier:"budget", note:"Spinning disk — noticeably slower" },
+        { name:"HDD 5400RPM",   val:65, tier:"budget", note:"Laptop HDD — very slow to boot" },
+      ]
+    }
+  };
+
+  const TIER_COLORS = { high:"#f5a623", mid:"#4fc3f7", budget:"#a78bfa" };
+  let currentCat = "gaming";
+
+  function render(cat) {
+    currentCat = cat;
+    const d = DATA[cat];
+    const max = Math.max(...d.items.map(i => i.val));
+    const chart = document.getElementById('bench-chart');
+    if (!chart) return;
+
+    chart.innerHTML = `<div class="bench-title">${d.label}</div>` +
+      d.items.map((item, idx) => {
+        const pct = (item.val / max) * 100;
+        const barW = d.invert ? (100 - pct + 20) : pct;
+        const displayW = Math.max(8, barW);
+        return `
+        <div class="bench-row" style="animation-delay:${idx * 0.06}s">
+          <div class="bench-name">${item.name}</div>
+          <div class="bench-bar-wrap">
+            <div class="bench-bar" style="--w:0%;--tw:${displayW}%;background:${TIER_COLORS[item.tier]}" data-note="${item.note}" data-val="${item.val}" data-unit="${d.unit}">
+              <span class="bench-val">${item.val} ${d.unit}</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+
+    // animate bars in
+    setTimeout(() => {
+      chart.querySelectorAll('.bench-bar').forEach(b => {
+        b.style.setProperty('--w', b.style.getPropertyValue('--tw'));
+      });
+    }, 50);
+
+    // tooltips
+    chart.querySelectorAll('.bench-bar').forEach(bar => {
+      bar.addEventListener('mouseenter', e => {
+        bar.title = `${bar.dataset.note} — ${bar.dataset.val} ${bar.dataset.unit}`;
+      });
+    });
+
+    // update active tab
+    document.querySelectorAll('.bench-tab').forEach(t => {
+      t.classList.toggle('active', t.dataset.cat === cat);
+    });
+  }
+
+  document.querySelectorAll('.bench-tab').forEach(btn => {
+    btn.addEventListener('click', () => render(btn.dataset.cat));
+  });
+
+  // init on scroll into view
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { render('gaming'); obs.unobserve(e.target); } });
+  }, { threshold: 0.2 });
+  const bw = document.getElementById('benchmarks');
+  if (bw) obs.observe(bw);
+})();
+
+/* ── HEAT MAP ── */
+(function(){
+  const MODES = {
+    idle: {
+      label: "Idle temperatures",
+      cpu:  { temp: 32,  glow: 0.15 },
+      gpu:  { temp: 35,  glow: 0.12 },
+      vrm:  { temp: 28,  glow: 0.10 },
+      ram:  { temp: 30,  glow: 0.08 },
+      ssd:  { temp: 28,  glow: 0.06 },
+      psu:  { temp: 32,  glow: 0.10 },
+      fan1: { temp: null, rpm: 800 },
+      fan2: { temp: null, rpm: 700 },
+      fan3: { temp: null, rpm: 650 },
+      airflow: false,
+    },
+    gaming: {
+      label: "Gaming load — high heat output",
+      cpu:  { temp: 72,  glow: 0.75 },
+      gpu:  { temp: 83,  glow: 0.85 },
+      vrm:  { temp: 58,  glow: 0.55 },
+      ram:  { temp: 42,  glow: 0.35 },
+      ssd:  { temp: 38,  glow: 0.30 },
+      psu:  { temp: 55,  glow: 0.50 },
+      fan1: { temp: null, rpm: 1800 },
+      fan2: { temp: null, rpm: 1600 },
+      fan3: { temp: null, rpm: 1500 },
+      airflow: true,
+    },
+    render: {
+      label: "Rendering — CPU under full load",
+      cpu:  { temp: 88,  glow: 0.92 },
+      gpu:  { temp: 55,  glow: 0.45 },
+      vrm:  { temp: 72,  glow: 0.70 },
+      ram:  { temp: 45,  glow: 0.38 },
+      ssd:  { temp: 40,  glow: 0.32 },
+      psu:  { temp: 58,  glow: 0.52 },
+      fan1: { temp: null, rpm: 2000 },
+      fan2: { temp: null, rpm: 1800 },
+      fan3: { temp: null, rpm: 1700 },
+      airflow: true,
+    }
+  };
+
+  const COMP_INFO = {
+    cpu:  { name:"CPU",  full:"Central Processing Unit",   color:"#f5a623" },
+    gpu:  { name:"GPU",  full:"Graphics Processing Unit",  color:"#4fc3f7" },
+    vrm:  { name:"VRM",  full:"Voltage Regulator Module",  color:"#f97316" },
+    ram:  { name:"RAM",  full:"Random Access Memory",      color:"#a78bfa" },
+    ssd:  { name:"SSD",  full:"Solid State Drive",         color:"#48c78e" },
+    psu:  { name:"PSU",  full:"Power Supply Unit",         color:"#f5a623" },
+    fan1: { name:"Fan 1",full:"Case Fan (Top Intake)",     color:"#94a3b8" },
+    fan2: { name:"Fan 2",full:"Case Fan (Mid Exhaust)",    color:"#94a3b8" },
+    fan3: { name:"Fan 3",full:"Case Fan (Side)",           color:"#94a3b8" },
+  };
+
+  function tempColor(t) {
+    if (!t) return "#94a3b8";
+    if (t < 40) return "#4fc3f7";
+    if (t < 55) return "#48c78e";
+    if (t < 70) return "#f5a623";
+    if (t < 80) return "#f97316";
+    return "#ef4444";
+  }
+
+  function applyMode(mode) {
+    const m = MODES[mode];
+    if (!m) return;
+
+    // update heat blobs
+    ['cpu','gpu','psu','vrm','ram'].forEach(id => {
+      const el = document.getElementById(`hm-${id}-heat`);
+      if (el) el.style.opacity = m[id] ? m[id].glow : 0;
+    });
+
+    // update temp labels
+    ['cpu','gpu','vrm','ram','ssd','psu'].forEach(id => {
+      const el = document.getElementById(`hm-${id}-temp`);
+      if (!el || !m[id]) return;
+      const t = m[id].temp;
+      el.textContent = t + '°C';
+      el.setAttribute('fill', tempColor(t));
+    });
+
+    // fan borders
+    ['fan1','fan2','fan3'].forEach((id,i) => {
+      const comp = document.getElementById(`hmc-${id}`);
+      if (!comp) return;
+      const circle = comp.querySelector('circle');
+      if (!circle) return;
+      const rpm = m[id]?.rpm || 0;
+      const intensity = Math.min(1, rpm / 2000);
+      circle.style.opacity = 0.3 + intensity * 0.7;
+      // add spinning animation based on rpm
+      const blades = comp.querySelectorAll('.fan-spin-blade');
+      blades.forEach(b => b.style.animationDuration = rpm > 0 ? (60/rpm*1000)+'ms' : '0ms');
+    });
+
+    // airflow arrows
+    const af = document.getElementById('hm-airflow');
+    if (af) af.style.opacity = m.airflow ? 1 : 0;
+
+    // update temp strip
+    const strip = document.getElementById('hm-temp-strip');
+    if (strip) {
+      const entries = ['cpu','gpu','vrm','ram','ssd','psu'].filter(id => m[id]);
+      strip.innerHTML = entries.map(id => {
+        const t = m[id].temp;
+        return `<div class="hm-strip-item">
+          <span class="hm-strip-dot" style="background:${tempColor(t)}"></span>
+          <span class="hm-strip-name">${COMP_INFO[id].name}</span>
+          <span class="hm-strip-temp" style="color:${tempColor(t)}">${t}°C</span>
+        </div>`;
+      }).join('');
+    }
+
+    // update active button
+    document.querySelectorAll('.hm-btn').forEach(b => {
+      b.classList.toggle('active', b.id === `hm-${mode}`);
+    });
+  }
+
+  // hover tooltip
+  const hmTooltip = document.getElementById('hm-tooltip');
+  const hmName    = document.getElementById('hm-tt-name');
+  const hmTemp    = document.getElementById('hm-tt-temp');
+  const hmDesc    = document.getElementById('hm-tt-desc');
+
+  function getActiveMode() {
+    const btn = document.querySelector('.hm-btn.active');
+    return btn ? btn.id.replace('hm-','') : 'idle';
+  }
+
+  document.querySelectorAll('.hm-comp').forEach(comp => {
+    comp.style.cursor = 'pointer';
+    comp.addEventListener('mouseenter', e => {
+      const id = comp.dataset.id;
+      const info = COMP_INFO[id];
+      const mode = MODES[getActiveMode()];
+      if (!info || !hmTooltip) return;
+      const mData = mode[id];
+      hmName.textContent = info.name + ' — ' + info.full;
+      hmName.style.color = info.color;
+      if (mData && mData.temp) {
+        hmTemp.textContent = mData.temp + '°C';
+        hmTemp.style.color = tempColor(mData.temp);
+      } else if (mData && mData.rpm !== undefined) {
+        hmTemp.textContent = mData.rpm + ' RPM';
+        hmTemp.style.color = info.color;
+      } else {
+        hmTemp.textContent = '';
+      }
+      hmDesc.textContent = mData && mData.temp
+        ? mData.temp < 40 ? 'Running cool — normal operation'
+        : mData.temp < 60 ? 'Warm — within safe limits'
+        : mData.temp < 75 ? 'Hot — heavy load, fans compensating'
+        : 'Very hot — near thermal limit'
+        : '';
+      hmTooltip.style.display = 'block';
+    });
+    comp.addEventListener('mouseleave', () => {
+      if (hmTooltip) hmTooltip.style.display = 'none';
+    });
+    comp.addEventListener('mousemove', e => {
+      if (!hmTooltip) return;
+      const scene = document.getElementById('heatmap-scene');
+      const rect = scene.getBoundingClientRect();
+      hmTooltip.style.left = (e.clientX - rect.left + 12) + 'px';
+      hmTooltip.style.top  = (e.clientY - rect.top  - 10) + 'px';
+    });
+  });
+
+  document.getElementById('hm-idle')?.addEventListener('click',   () => applyMode('idle'));
+  document.getElementById('hm-gaming')?.addEventListener('click', () => applyMode('gaming'));
+  document.getElementById('hm-render')?.addEventListener('click', () => applyMode('render'));
+
+  // init on scroll into view
+  const obs2 = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { applyMode('idle'); obs2.unobserve(e.target); } });
+  }, { threshold: 0.2 });
+  const hw = document.getElementById('heatmap');
+  if (hw) obs2.observe(hw);
+})();
 
 /* ── TEAM MEMBER MODAL ── */
 const teamMembers = {
