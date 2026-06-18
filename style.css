@@ -420,123 +420,471 @@ nav {
 
 #conclusion .prose-block { border-left-color: var(--accent); }
 
-/* ── COMPONENTS GRID ── */
-#components { padding-top: 0; }
-
-.comp-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem 4rem;
+/* ── MODAL TABS & STATS (used by interactive diagram) ── */
+.modal-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem 2rem 0;
+  border-bottom: 1px solid var(--border);
 }
 
-/* each component card */
-.comp-card {
-  position: relative;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.6rem 1.2rem 1.4rem;
+.modal-tab {
+  background: none;
+  border: none;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.6rem 1rem;
   cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.modal-tab:hover { color: var(--text); }
+.modal-tab.active {
+  color: var(--accent2);
+  border-bottom-color: var(--accent2);
+}
+.modal.orange .modal-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.modal.purple .modal-tab.active { color: var(--accent3); border-bottom-color: var(--accent3); }
+.modal.green  .modal-tab.active { color: #48c78e; border-bottom-color: #48c78e; }
+
+.modal-tab-pane { display: none; }
+.modal-tab-pane.active { display: block; animation: qnaFadeIn 0.25s ease; }
+
+.stat-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+}
+
+.stat-row-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stat-row-val {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent2);
+}
+.modal.orange .stat-row-val { color: var(--accent); }
+.modal.purple .stat-row-val { color: var(--accent3); }
+.modal.green  .stat-row-val { color: #48c78e; }
+
+/* ══════════════════════════════════
+   INTERACTIVE PC DIAGRAM
+══════════════════════════════════ */
+#interactive { padding-top: 0; }
+
+.interactive-wrap {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+  align-items: start;
+}
+
+.pc-diagram-frame {
+  position: relative;
+  background: #0c0f16;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.pc-svg { width: 100%; height: auto; display: block; }
+
+/* replay button */
+.diagram-replay-btn {
+  position: absolute;
+  top: 1rem; left: 1rem;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(10,12,16,0.85);
+  border: 1px solid rgba(79,195,247,0.3);
+  border-radius: 99px;
+  color: var(--accent2);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, opacity 0.2s;
+}
+.diagram-replay-btn:hover { border-color: var(--accent2); background: rgba(79,195,247,0.1); }
+.diagram-replay-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* base shapes */
+.pc-base      { fill: #2a1f14; stroke: #4a3a26; stroke-width: 1.5; }
+.pc-base-edge { fill: #3a2c1c; }
+.pc-panel     { fill: #3a2c1c; stroke: #5a4530; stroke-width: 1.5; }
+.pc-side      { fill: #e8e4dc; opacity: 0.85; }
+
+.pc-mobo-rect {
+  fill: #2e2418;
+  stroke: rgba(79,195,247,0.25);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  transition: stroke 0.4s, fill 0.4s;
+}
+
+/* clickable component groups */
+.pc-component { cursor: pointer; }
+.pc-component:hover .cpu-body,
+.pc-component:hover .gpu-body,
+.pc-component:hover .ram-stick,
+.pc-component:hover .ssd-body,
+.pc-component:hover .pc-mobo-rect,
+.pc-component:hover .pc-chip,
+.pc-component:hover .pc-connector,
+.pc-component:hover .pc-cable,
+.pc-component:hover .case-fan-ring,
+.pc-component:hover .power-btn-ring {
+  filter: drop-shadow(0 0 8px rgba(79,195,247,0.6));
+}
+
+/* CPU */
+.cpu-body { fill: #1a1a1a; stroke: #444; stroke-width: 1.5; transition: stroke 0.4s, filter 0.4s; }
+.cpu-die  { fill: #2a2a2a; stroke: rgba(245,166,35,0.3); stroke-width: 1; transition: fill 0.5s, stroke 0.4s; }
+
+/* RAM */
+.ram-stick { fill: #0f3d2e; stroke: #48c78e; stroke-width: 1; transition: fill 0.5s, filter 0.4s; }
+
+/* GPU */
+.gpu-body { fill: #1a1a1a; stroke: #444; stroke-width: 1.5; transition: stroke 0.4s, filter 0.4s; }
+.gpu-fan-window { fill: #0d0d0d; stroke: #333; stroke-width: 1; }
+.gpu-fan-blade-circle { fill: none; }
+
+/* chips/vrm */
+.pc-chip { fill: #1a1a1a; stroke: #444; stroke-width: 1; transition: stroke 0.4s, filter 0.4s; }
+
+/* connector */
+.pc-connector { fill: #d4d4d4; stroke: #888; stroke-width: 1; transition: filter 0.4s; }
+
+/* cable / PCIe */
+.pc-cable { fill: #9b59ff; opacity: 0.7; transition: filter 0.4s, opacity 0.4s; }
+
+/* SSD */
+.ssd-body { fill: #0a0a0a; stroke: #444; stroke-width: 1.5; transition: stroke 0.4s, filter 0.4s; }
+.ssd-label-chip { fill: #c0392b; }
+.ssd-text { fill: #ddd; font-size: 9px; font-weight: 700; }
+.ssd-led {
+  fill: #444;
+  transition: fill 0.4s, filter 0.4s;
+}
+
+/* labels */
+.pc-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  fill: #8a93a8;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  transition: fill 0.4s;
+}
+.vrm-label, .pin-label { font-size: 8px; }
+
+/* power button */
+.power-btn-group { cursor: pointer; }
+.power-btn-ring { fill: none; stroke: #555; stroke-width: 3; transition: stroke 0.4s, filter 0.4s; }
+.power-btn-face { fill: #1a1a1a; stroke: #333; stroke-width: 1; transition: fill 0.4s; }
+.power-icon { stroke: #777; stroke-width: 3; transition: stroke 0.4s; }
+.power-label { font-size: 9px; }
+
+/* fans */
+.case-fan-ring { fill: #111; stroke: #444; stroke-width: 1.5; transition: stroke 0.4s, filter 0.4s; }
+.case-fan-blades { fill: #2a2a2a; transition: fill 0.4s; transform-box: fill-box; }
+.fan-blade { fill: #2a2a2a; transition: fill 0.4s; }
+.fan-hub { fill: #555; }
+.gpu-fan-blades { transform-box: fill-box; }
+
+/* boot pulse */
+.boot-pulse {
+  fill: #4fc3f7;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(79,195,247,0.9));
+  pointer-events: none;
+}
+.boot-pulse.visible { opacity: 1; }
+.boot-pulse.ping {
+  animation: bootPing 0.9s ease-out;
+}
+@keyframes bootPing {
+  0%   { r: 7; opacity: 1; }
+  70%  { r: 22; opacity: 0.25; }
+  100% { r: 7; opacity: 1; }
+}
+
+/* boot-active highlight on components */
+.boot-active .cpu-body,
+.boot-active .gpu-body,
+.boot-active .ssd-body,
+.boot-active .pc-mobo-rect,
+.boot-active .pc-chip,
+.boot-active .power-btn-ring,
+.boot-active .case-fan-ring {
+  stroke: var(--accent2) !important;
+  filter: drop-shadow(0 0 14px rgba(79,195,247,0.9)) !important;
+}
+.boot-active .ram-stick {
+  fill: #1ddb96 !important;
+  filter: drop-shadow(0 0 14px rgba(72,199,142,0.9)) !important;
+}
+.boot-active .pc-connector,
+.boot-active .pc-cable {
+  filter: drop-shadow(0 0 14px rgba(79,195,247,0.9)) !important;
+  opacity: 1 !important;
+}
+.boot-active .pc-label { fill: var(--accent2) !important; }
+
+/* dim everything except boot-active during boot */
+.pc-diagram-frame.booting .pc-component:not(.boot-active) { opacity: 0.35; transition: opacity 0.4s; }
+.pc-diagram-frame.booting .pc-component.boot-active { opacity: 1; transition: opacity 0.4s; }
+
+/* boot caption overlay */
+.boot-caption {
+  position: absolute;
+  bottom: 1rem; left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: calc(100% - 2rem);
+  max-width: 480px;
+  background: rgba(10,12,18,0.92);
+  border: 1px solid rgba(79,195,247,0.3);
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  backdrop-filter: blur(8px);
+  z-index: 6;
+}
+.boot-caption.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+.boot-caption-step {
+  display: block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin-bottom: 0.3rem;
+}
+
+.boot-caption-text {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #d0d6e4;
+  font-weight: 300;
+}
+
+/* ═══ STATE-BASED VISUALS ═══ */
+
+/* OFF state — everything dim */
+.state-off .pc-mobo-rect    { stroke: rgba(79,195,247,0.1); }
+.state-off .ram-stick       { fill: #1a2620; }
+.state-off .cpu-die         { fill: #1a1a1a; }
+.state-off .case-fan-blades,
+.state-off .gpu-fan-blades  { animation: none; }
+.state-off .ssd-led         { fill: #2a2a2a; }
+.state-off .power-btn-ring  { stroke: #555; }
+.state-off .power-btn-face  { fill: #1a1a1a; }
+
+/* IDLE state — system on, low activity */
+.state-idle .pc-mobo-rect { stroke: rgba(79,195,247,0.4); }
+.state-idle .ram-stick    { fill: #1ddb96; filter: drop-shadow(0 0 4px rgba(72,199,142,0.5)); animation: ramPulse 2.4s ease-in-out infinite; }
+.state-idle .cpu-die      { fill: #3a5a8a; }
+.state-idle .ssd-led      { fill: #48c78e; filter: drop-shadow(0 0 4px rgba(72,199,142,0.6)); animation: ledBlink 2s steps(2) infinite; }
+.state-idle .power-btn-ring { stroke: var(--accent2); filter: drop-shadow(0 0 6px rgba(79,195,247,0.5)); }
+.state-idle .power-btn-face { fill: #16324a; }
+.state-idle .case-fan-blades,
+.state-idle .gpu-fan-blades { animation: fanSpin 3s linear infinite; }
+
+/* GAMING state — high load */
+.state-gaming .pc-mobo-rect { stroke: rgba(245,166,35,0.5); }
+.state-gaming .ram-stick    { fill: #1ddb96; filter: drop-shadow(0 0 8px rgba(72,199,142,0.8)); animation: ramPulse 0.8s ease-in-out infinite; }
+.state-gaming .cpu-die      { fill: #d35400; filter: drop-shadow(0 0 8px rgba(245,166,35,0.7)); animation: heatPulse 1s ease-in-out infinite; }
+.state-gaming .gpu-body     { filter: drop-shadow(0 0 10px rgba(245,166,35,0.6)); }
+.state-gaming .gpu-fan-window { fill: #3a1f0a; animation: heatPulse 1s ease-in-out infinite; }
+.state-gaming .ssd-led      { fill: #48c78e; filter: drop-shadow(0 0 6px rgba(72,199,142,0.8)); animation: ledBlink 0.4s steps(2) infinite; }
+.state-gaming .power-btn-ring { stroke: var(--accent); filter: drop-shadow(0 0 10px rgba(245,166,35,0.6)); }
+.state-gaming .power-btn-face { fill: #4a2a10; }
+.state-gaming .case-fan-blades,
+.state-gaming .gpu-fan-blades { animation: fanSpin 0.6s linear infinite; }
+
+@keyframes fanSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes ramPulse {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.45; }
+}
+@keyframes heatPulse {
+  0%,100% { fill: #d35400; }
+  50%     { fill: #ff6b35; }
+}
+@keyframes ledBlink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.2; }
+}
+
+/* floating badges */
+.pc-badge {
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 0.7rem;
-  overflow: hidden;
-  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-  user-select: none;
+  background: rgba(10,12,18,0.85);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.4rem 0.7rem;
+  font-family: 'Orbitron', sans-serif;
+  backdrop-filter: blur(6px);
+  z-index: 4;
+  transition: border-color 0.4s;
+}
+.pc-badge-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.pc-badge-val {
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: var(--accent2);
+  margin-top: 0.1rem;
 }
 
-.comp-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 0%, var(--glow-c, rgba(79,195,247,0.12)), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
+.cpu-badge { top: 1rem; right: 1rem; }
+.gpu-badge { top: 5rem; right: 1rem; }
+.fps-badge { bottom: 1rem; right: 1rem; }
+
+.state-gaming .cpu-badge,
+.state-gaming .gpu-badge { border-color: rgba(245,166,35,0.4); }
+.state-gaming .cpu-badge .pc-badge-val,
+.state-gaming .gpu-badge .pc-badge-val { color: var(--accent); }
+.state-gaming .fps-badge { border-color: rgba(72,199,142,0.4); }
+.state-gaming .fps-badge .pc-badge-val { color: #48c78e; }
+
+/* ═══ CONTROLS PANEL ═══ */
+.pc-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
 }
 
-.comp-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--hover-c, rgba(79,195,247,0.5));
-  box-shadow: 0 8px 30px var(--shadow-c, rgba(79,195,247,0.15));
-}
-.comp-card:hover::before { opacity: 1; }
-
-/* colour variants */
-.comp-card.orange {
-  --hover-c: rgba(245,166,35,0.5);
-  --shadow-c: rgba(245,166,35,0.15);
-  --glow-c: rgba(245,166,35,0.12);
-}
-.comp-card.purple {
-  --hover-c: rgba(167,139,250,0.5);
-  --shadow-c: rgba(167,139,250,0.15);
-  --glow-c: rgba(167,139,250,0.12);
-}
-.comp-card.green {
-  --hover-c: rgba(72,199,142,0.5);
-  --shadow-c: rgba(72,199,142,0.15);
-  --glow-c: rgba(72,199,142,0.12);
-}
-
-.comp-card-icon {
-  font-size: 2rem;
-  width: 60px; height: 60px;
+.pc-status-line {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 14px;
-  background: rgba(79,195,247,0.07);
-  border: 1px solid rgba(79,195,247,0.2);
-  transition: transform 0.25s;
-}
-.comp-card:hover .comp-card-icon { transform: scale(1.1); }
-
-.comp-card.orange .comp-card-icon { background: rgba(245,166,35,0.08); border-color: rgba(245,166,35,0.25); }
-.comp-card.purple .comp-card-icon { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); }
-.comp-card.green  .comp-card-icon { background: rgba(72,199,142,0.08);  border-color: rgba(72,199,142,0.25); }
-
-.comp-card-abbr {
+  gap: 0.6rem;
   font-family: 'Orbitron', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.07em;
-  color: var(--accent2);
-  text-transform: uppercase;
-  line-height: 1.2;
-}
-.comp-card.orange .comp-card-abbr { color: var(--accent); }
-.comp-card.purple .comp-card-abbr { color: var(--accent3); }
-.comp-card.green  .comp-card-abbr { color: #48c78e; }
-
-.comp-card-full {
-  font-size: 0.7rem;
-  color: var(--muted);
-  line-height: 1.4;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
 }
 
-.comp-card-hint {
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(79,195,247,0.4);
-  margin-top: auto;
-  padding-top: 0.5rem;
+.pc-status-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #555;
+  flex-shrink: 0;
+  transition: background 0.4s, box-shadow 0.4s;
+}
+.pc-status-dot.on  { background: var(--accent2); box-shadow: 0 0 8px rgba(79,195,247,0.6); animation: pulse 2s ease-in-out infinite; }
+.pc-status-dot.hot { background: var(--accent);  box-shadow: 0 0 8px rgba(245,166,35,0.6); animation: pulse 1s ease-in-out infinite; }
+
+.pc-ctrl-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.9rem 1.2rem;
   font-family: 'Orbitron', sans-serif;
-  transition: color 0.2s;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s, background 0.2s, opacity 0.2s;
 }
-.comp-card:hover .comp-card-hint { color: var(--accent2); }
-.comp-card.orange .comp-card-hint { color: rgba(245,166,35,0.4); }
-.comp-card.orange:hover .comp-card-hint { color: var(--accent); }
-.comp-card.purple .comp-card-hint { color: rgba(167,139,250,0.4); }
-.comp-card.purple:hover .comp-card-hint { color: var(--accent3); }
-.comp-card.green  .comp-card-hint { color: rgba(72,199,142,0.4); }
-.comp-card.green:hover  .comp-card-hint { color: #48c78e; }
+.pc-ctrl-btn:hover:not(:disabled) {
+  border-color: var(--accent2);
+  transform: translateY(-2px);
+}
+.pc-ctrl-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.pc-ctrl-btn.primary {
+  background: linear-gradient(135deg, var(--accent), #e8920d);
+  color: #0a0c10;
+  border-color: transparent;
+  box-shadow: 0 0 20px rgba(245,166,35,0.25);
+}
+.pc-ctrl-btn.primary:hover { box-shadow: 0 0 30px rgba(245,166,35,0.4); }
+
+.pc-ctrl-icon { font-size: 1rem; }
+
+.pc-info-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent2);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.2rem;
+  margin-top: 0.5rem;
+}
+.pc-info-box p {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: #b0b8cc;
+  font-weight: 300;
+}
+.state-gaming + .pc-controls .pc-info-box,
+.pc-diagram-frame.state-gaming ~ .pc-controls .pc-info-box { border-left-color: var(--accent); }
+
+@media (max-width: 900px) {
+  .interactive-wrap { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .interactive-wrap { padding: 0 1rem 3rem; }
+  .pc-badge { transform: scale(0.85); }
+}
 
 /* ── MODAL OVERLAY ── */
 .modal-overlay {
@@ -888,7 +1236,6 @@ footer .footer-logo span {
 @media (max-width: 600px) {
   .nav-links { display: none; }
   .hero h1   { font-size: clamp(2.5rem, 14vw, 5rem); }
-  .comp-grid { grid-template-columns: repeat(2, 1fr); padding: 0 1rem 3rem; }
   .modal     { border-radius: 12px; }
 }
 
@@ -2308,7 +2655,7 @@ footer .footer-logo span {
 
 /* smooth section transitions — subtle coloured glow at section boundaries */
 #basics,
-#components,
+#interactive,
 #build,
 #applications,
 #workflow,
@@ -2724,3 +3071,315 @@ footer .footer-logo span {
 .modal.orange #team-modal-icon { color: var(--accent); }
 .modal.purple #team-modal-icon { color: var(--accent3); }
 .modal.green  #team-modal-icon { color: #48c78e; }
+
+/* ══════════════════════════════════
+   3D MODEL IFRAME EMBED
+══════════════════════════════════ */
+.model-3d-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+}
+
+#pc-3d-frame {
+  width: 100%;
+  height: 680px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #0a0c10;
+  display: block;
+  box-shadow: 0 0 60px rgba(79,195,247,0.08), 0 30px 80px rgba(0,0,0,0.5);
+}
+
+.model-3d-hint {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.model-3d-hint span {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 0.3rem 0.8rem;
+}
+
+@media (max-width: 600px) {
+  #pc-3d-frame { height: 400px; }
+  .model-3d-hint { gap: 0.5rem; }
+  .model-3d-wrap { padding: 0 1rem 3rem; }
+}
+
+/* ══════════════════════════════════
+   PERFORMANCE BENCHMARKS
+══════════════════════════════════ */
+#benchmarks { padding-top: 0; }
+
+.bench-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+}
+
+.bench-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.bench-tab {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: all 0.2s;
+}
+.bench-tab:hover { border-color: var(--accent2); color: var(--accent2); }
+.bench-tab.active {
+  background: rgba(79,195,247,0.12);
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+
+.bench-chart {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-height: 300px;
+}
+
+.bench-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.bench-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.7rem;
+  animation: fadeUp 0.4s ease both;
+}
+
+.bench-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.62rem;
+  color: var(--text);
+  width: 130px;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+
+.bench-bar-wrap {
+  flex: 1;
+  height: 28px;
+  position: relative;
+}
+
+.bench-bar {
+  height: 100%;
+  width: var(--w, 0%);
+  border-radius: 4px;
+  transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.5rem;
+  position: relative;
+  min-width: 8px;
+  opacity: 0.85;
+  cursor: pointer;
+}
+.bench-bar:hover { opacity: 1; filter: brightness(1.15); }
+
+.bench-val {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: rgba(0,0,0,0.7);
+  white-space: nowrap;
+}
+
+.bench-legend {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+.bench-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.62rem;
+  color: var(--muted);
+  font-family: 'Orbitron', monospace;
+}
+.bench-legend-item span {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* ══════════════════════════════════
+   HEAT MAP
+══════════════════════════════════ */
+#heatmap { padding-top: 0; }
+
+.heatmap-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+}
+
+.heatmap-controls {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.hm-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  padding: 0.5rem 1.1rem;
+  cursor: pointer;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: all 0.25s;
+}
+.hm-btn:hover { border-color: var(--accent); color: var(--accent); }
+.hm-btn.active {
+  background: rgba(245,166,35,0.12);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.heatmap-scene {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.heatmap-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hm-comp {
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+.hm-comp:hover { filter: brightness(1.3); }
+
+/* smooth heat blob transitions */
+#hm-heat-layer ellipse {
+  transition: opacity 0.8s ease;
+}
+#hm-airflow {
+  transition: opacity 0.6s ease;
+}
+
+.hm-tooltip {
+  position: absolute;
+  display: none;
+  background: rgba(10,12,18,0.96);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  pointer-events: none;
+  z-index: 10;
+  min-width: 180px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+.hm-tt-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.hm-tt-temp {
+  font-family: 'Orbitron', monospace;
+  font-size: 1rem;
+  font-weight: 900;
+  margin-bottom: 0.2rem;
+}
+.hm-tt-desc {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.hm-temp-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.hm-strip-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #0a0c10;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.35rem 0.7rem;
+}
+.hm-strip-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
+}
+.hm-strip-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.58rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+.hm-strip-temp {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .bench-name { width: 80px; font-size: 0.55rem; }
+  .bench-wrap, .heatmap-wrap { padding: 0 1rem 3rem; }
+}
